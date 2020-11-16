@@ -30,6 +30,7 @@ public class  SignUp extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
+        findViewById(R.id.gotoLoginButton).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -37,6 +38,9 @@ public class  SignUp extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.signUpButton:
                     signUp();
+                    break;
+                case R.id.gotoLoginButton:
+                    myStartActivity(LogIn.class);
                     break;
             }
         }
@@ -86,7 +90,8 @@ public class  SignUp extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-private void showToast(String msg){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-}
+    private void showToast(String msg)
+    {
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+    }
 }
