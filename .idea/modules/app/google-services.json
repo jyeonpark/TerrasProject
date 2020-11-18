@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "896311217289",
+    "firebase_url": "https://terrasproject-20e3f.firebaseio.com",
+    "project_id": "terrasproject-20e3f",
+    "storage_bucket": "terrasproject-20e3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896311217289:android:c9194b7e4f7aa51bb74a58",
+        "android_client_info": {
+          "package_name": "com.example.terrasproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896311217289-ete3fnjlig2sg95gcnrta084rrtj7522.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.terrasproject",
+            "certificate_hash": "c95f9cb974ec04d5fc62d7a94b97f5a7446ad434"
+          }
+        },
+        {
+          "client_id": "896311217289-fh2s314813uh74hecvl4mfncekljl7hf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGP9x13gcGN1mSuZqgHS1_0jmVfl2s-9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896311217289-fh2s314813uh74hecvl4mfncekljl7hf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

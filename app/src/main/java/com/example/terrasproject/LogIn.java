@@ -15,59 +15,73 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class LogIn extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+  EditText studentID,password;
+  private DatabaseReference reference;
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+      super.onCreate(savedInstanceState);
+      setContentView(R.layout.activity_log_in);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+      studentID = findViewById(R.id.studentID);
+      password = findViewById(R.id.password);
 
-        mAuth = FirebaseAuth.getInstance();
+      reference = FirebaseDatabase.getInstance().getReference().child("Student");
+      findViewById(R.id.loginButton).setOnClickListener(onClickListener);
+      findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
+  }
 
-        findViewById(R.id.loginButton).setOnClickListener(onClickListener);
-        findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
-    }
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.loginButton:
-                    login();
-                    break;
-                case R.id.signUpButton:
-                    myStartActivity(SignUp.class);
-                    break;
-            }
-        }
-    };
-    private void login() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+  View.OnClickListener onClickListener = new View.OnClickListener(){
+      @Override
+      public void onClick(View v) {
+          switch (v.getId()) {
+              case R.id.loginButton:
+                  btnLogin_Click();
+                  break;
 
-        if (email.length() > 0 && password.length() > 0) {
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+              case R.id.signUpButton:
+                  btnSignup_Click();
+                  break;
+          }
+      }
+  };
+  String pw;
+  public void btnLogin_Click(){
+      String id = studentID.getText().toString();
+      pw = password.getText().toString();
 
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                showToast("로그인에 성공하였습니다.");
-                                myStartActivity(MainActivity.class);
-                            } else {
-                                if (task.getException() != null) {
-                                    showToast(task.getException().toString());
-                                }
-                            }
-                        }
-                    });
-        } else {
-            showToast("이메일 또는 비밀번호를 입력해 주세요.");
-        }
-    }
+      reference = reference.child(id);
+      reference.addValueEventListener(new ValueEventListener() {
+          @Override
+          public void onDataChange(DataSnapshot datasnapshot) {
+              if(datasnapshot.exists()) {
+                  Student student = datasnapshot.getValue(Student.class);
+                  if (pw.equals(student.getPassword())) {
+                      showToast("로그인성공");
+                      myStartActivity(MainActivity.class);
+                  } else {
+                      showToast("비밀번호틀림");
+                  }
+              }
+              else {
+                  showToast("등록된 학번이 아닙니다.");
+              }
+          }
+          @Override
+          public void onCancelled(@NonNull DatabaseError error) {}
+      });
+  }
+
+  public void btnSignup_Click(){
+      myStartActivity(SignUp.class);
+  }
 
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);

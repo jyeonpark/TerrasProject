@@ -12,7 +12,7 @@
 
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="center"
@@ -29,16 +29,16 @@
             android:padding="10dp">
 
             <EditText
-                android:id="@+id/emailEditText"
+                android:id="@+id/studentID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
                 android:ems="10"
-                android:hint="이메일"
+                android:hint="학번"
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/passwordEditText"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -56,7 +56,7 @@
                 android:id="@+id/signUpButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="회원가입" />
+                android:text="회원가입"/>
 
         </LinearLayout>
 
