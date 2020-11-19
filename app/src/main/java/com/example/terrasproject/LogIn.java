@@ -65,16 +65,15 @@ public class LogIn extends AppCompatActivity {
       checkuser.addListenerForSingleValueEvent(new ValueEventListener() {
           @Override
           public void onDataChange(DataSnapshot datasnapshot) {
-              if(datasnapshot.exists()) {
-                  String  systemPassword = datasnapshot.child(id).child("password").getValue(String.class);
-                  if(systemPassword.equals(pw)) {
+              if (datasnapshot.exists()) {
+                  String systemPassword = datasnapshot.child(id).child("password").getValue(String.class);
+                  if (systemPassword.equals(pw)) {
                       showToast("로그인에 성공하였습니다.");
                       myStartActivity(MainActivity.class);
                   } else {
                       showToast("비밀번호가 일치하지 않습니다.");
                   }
-              }
-              else {
+              } else {
                   showToast("등록된 학번이 아닙니다.");
               }
           }

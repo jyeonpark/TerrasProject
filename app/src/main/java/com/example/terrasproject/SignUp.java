@@ -54,18 +54,25 @@ public class  SignUp extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (studentID.length() > 0 && studentName.length() > 0 && password.length() > 0 && phoneNumber.length() > 0) {
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        if (data.getKey().equals(studentID.getText().toString())) {
-                           showToast("이미 존재하는 학번입니다.");
-                            reference.removeEventListener(this);
-                            return;
+                    if (studentID.length() == 8) {
+                        if (password.length() >= 8) {
+                            for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                if (data.getKey().equals(studentID.getText().toString())) {
+                                    showToast("이미 존재하는 학번입니다.");
+                                    reference.removeEventListener(this);
+                                    return;
+                                }
+                            }
+                            makeNewID();
                         }
+                        else{
+                            showToast("비밀번호는 8자리 이상입니다."); }
                     }
-                  makeNewID();
+                    else{
+                        showToast("학번은 8자리 입니다."); }
                 }
-                else{
-                    showToast("정보를 다 입력해 주세요");
-                }
+                else {
+                    showToast("정보를 다 입력해 주세요"); }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
@@ -74,6 +81,7 @@ public class  SignUp extends AppCompatActivity {
     void makeNewID(){
         reference.child(student.getStudentID()).setValue(student);
         showToast("회원가입완료");
+        myStartActivity(LogIn.class);
     }
     public void btnLogin_Click(View view){
         myStartActivity(LogIn.class);

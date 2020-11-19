@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:onClick="btnLogin_Click"
         android:padding="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:text="로그인"/>
