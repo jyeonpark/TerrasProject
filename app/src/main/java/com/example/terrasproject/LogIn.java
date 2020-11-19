@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.terrasproject.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,19 +21,22 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
 public class LogIn extends AppCompatActivity {
   EditText studentID,password;
+
+
   private DatabaseReference reference;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_log_in);
 
-      studentID = findViewById(R.id.studentID);
-      password = findViewById(R.id.password);
+      studentID = findViewById(R.id.login_studentID);
+      password = findViewById(R.id.login_password);
 
       reference = FirebaseDatabase.getInstance().getReference().child("Student");
       findViewById(R.id.loginButton).setOnClickListener(onClickListener);
@@ -52,22 +57,21 @@ public class LogIn extends AppCompatActivity {
           }
       }
   };
-  String pw;
   public void btnLogin_Click(){
-      String id = studentID.getText().toString();
-      pw = password.getText().toString();
+      final String id = studentID.getText().toString();
+      final String pw = password.getText().toString();
 
-      reference = reference.child(id);
-      reference.addValueEventListener(new ValueEventListener() {
+      Query checkuser =FirebaseDatabase.getInstance().getReference("Student").orderByChild("studentID").equalTo(id);
+      checkuser.addListenerForSingleValueEvent(new ValueEventListener() {
           @Override
           public void onDataChange(DataSnapshot datasnapshot) {
               if(datasnapshot.exists()) {
-                  Student student = datasnapshot.getValue(Student.class);
-                  if (pw.equals(student.getPassword())) {
-                      showToast("로그인성공");
+                  String  systemPassword = datasnapshot.child(id).child("password").getValue(String.class);
+                  if(systemPassword.equals(pw)) {
+                      showToast("로그인에 성공하였습니다.");
                       myStartActivity(MainActivity.class);
                   } else {
-                      showToast("비밀번호틀림");
+                      showToast("비밀번호가 일치하지 않습니다.");
                   }
               }
               else {

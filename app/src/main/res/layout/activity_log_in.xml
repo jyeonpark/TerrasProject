@@ -29,7 +29,7 @@
             android:padding="10dp">
 
             <EditText
-                android:id="@+id/studentID"
+                android:id="@+id/login_studentID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
@@ -38,7 +38,7 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
