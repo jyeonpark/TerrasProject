@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#C2D9DC"
+        android:gravity="center"
+        android:text="시간 선택"
+        android:textColorHint="#101010"
+        android:textSize="15sp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#ECF9FB"
+        android:gravity="center"
+        android:shadowColor="#C31111"
+        android:text="<시작시간과 끝시간을 눌러주세요>"
+        android:textColorHighlight="#EADCDC"
+        android:textColorHint="#101010"
+        android:textSize="15sp"
+        android:textStyle="bold"></TextView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#CCC"
+                android:onClick="btnTimeClick"
+                android:tag="9"
+                android:text="9:00~10:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#CCC"
+                android:onClick="btnTimeClick"
+                android:tag="10"
+                android:text="10:00~11:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#CCC"
+                android:onClick="btnTimeClick"
+                android:tag="11"
+                android:text="11:00~12:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#CCC"
+                android:onClick="btnTimeClick"
+                android:tag="12"
+                android:text="12:00~13:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="13"
+                android:text="13:00~14:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="14"
+                android:text="14:00~15:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="15"
+                android:text="15:00~16:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="16"
+                android:text="16:00~17:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="17"
+                android:text="17:00~18:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="18"
+                android:text="18:00~19:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="19"
+                android:text="20:00~21:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="20"
+                android:text="20:00~21:00"></Button>
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:onClick="btnTimeClick"
+                android:tag="21"
+                android:text="21:00~22:00"></Button>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btncomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnTimeClick"
+        android:text="선택완료"></Button>
+
+    <Button
+        android:id="@+id/btnreset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="btnTimeClick"
+        android:text="초기화"></Button>
+
+</LinearLayout>
+

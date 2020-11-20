@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#C2D9DC"
+        android:gravity="center"
+        android:text="좌석 선택"
+        android:textColorHint="#101010"
+        android:textSize="15sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:text="엘
+            리
+            베
+            이
+            터"
+            android:gravity="center">
+        </TextView>
+        <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3" >
+
+            <Button
+                android:id="@+id/terras4-1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="4-1"
+                android:onClick="btnSeatClick"
+                android:tag="terras4-1"/>
+
+            <Button
+                android:id="@+id/terras4-2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="4-2"
+                android:onClick="btnSeatClick"
+                android:tag="terras4-2"/>
+
+            <Button
+                android:id="@+id/terras4-3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="4-3"
+                android:onClick="btnSeatClick"
+                android:tag="terras4-3"/>
+
+            <Button
+                android:id="@+id/terras3-1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="3-1"
+                android:onClick="btnSeatClick"
+                android:tag="terras3-1"/>
+
+            <Button
+                android:id="@+id/terras3-2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="3-2"
+                android:onClick="btnSeatClick"
+                android:tag="terras3-2"/>
+
+            <Button
+                android:id="@+id/terras3-3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="3-3"
+                android:onClick="btnSeatClick"
+                android:tag="terras3-3"/>
+
+            <Button
+                android:id="@+id/terras2-1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="2-1"
+                android:onClick="btnSeatClick"
+                android:tag="terras2-1"/>
+
+            <Button
+                android:id="@+id/terras2-2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="2-2"
+                android:onClick="btnSeatClick"
+                android:tag="terras2-2"/>
+
+            <Button
+                android:id="@+id/terras2-3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="10dp"
+                android:text="2-3"
+                android:onClick="btnSeatClick"
+                android:tag="terras2-3"/>
+
+        </GridLayout>
+    </LinearLayout>
+
+</LinearLayout>

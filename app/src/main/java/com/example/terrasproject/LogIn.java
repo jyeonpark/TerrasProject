@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -27,9 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LogIn extends AppCompatActivity {
   EditText studentID,password;
-
-
   private DatabaseReference reference;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class LogIn extends AppCompatActivity {
       password = findViewById(R.id.login_password);
 
       reference = FirebaseDatabase.getInstance().getReference().child("Student");
+
       findViewById(R.id.loginButton).setOnClickListener(onClickListener);
       findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
   }
