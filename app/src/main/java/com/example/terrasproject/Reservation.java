@@ -84,7 +84,6 @@ public class Reservation extends AppCompatActivity {
         });
     }
     public void btnTimeClick(View view) {
-        showToast(finishTime);
         LinearLayout linearLayout = findViewById(R.id.parentview);
         if(view == findViewById(R.id.btnreset)){
                 clickcount=0;
