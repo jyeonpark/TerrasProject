@@ -28,7 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class LogIn extends AppCompatActivity {
-  EditText studentID,password;
+  EditText studentid,password;
+  static String studentID;
   private DatabaseReference reference;
 
   @Override
@@ -36,7 +37,7 @@ public class LogIn extends AppCompatActivity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_log_in);
 
-      studentID = findViewById(R.id.login_studentID);
+      studentid = findViewById(R.id.login_studentID);
       password = findViewById(R.id.login_password);
 
       reference = FirebaseDatabase.getInstance().getReference().child("Student");
@@ -60,7 +61,7 @@ public class LogIn extends AppCompatActivity {
       }
   };
   public void btnLogin_Click(){
-      final String id = studentID.getText().toString();
+      final String id = studentid.getText().toString();
       final String pw = password.getText().toString();
 
       Query checkuser =FirebaseDatabase.getInstance().getReference("Student").orderByChild("studentID").equalTo(id);
@@ -71,6 +72,7 @@ public class LogIn extends AppCompatActivity {
                   String systemPassword = datasnapshot.child(id).child("password").getValue(String.class);
                   if (systemPassword.equals(pw)) {
                       showToast("로그인에 성공하였습니다.");
+                      studentID = id;
                       myStartActivity(MainActivity.class);
                   } else {
                       showToast("비밀번호가 일치하지 않습니다.");
@@ -93,6 +95,7 @@ public class LogIn extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
     private void showToast(String msg)
     {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();

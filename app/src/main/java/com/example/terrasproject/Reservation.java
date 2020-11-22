@@ -1,5 +1,6 @@
 package com.example.terrasproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.ShowableListMenu;
 
@@ -30,8 +32,9 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
-    String terras,date,startTime,finishTime;
+    static String terras,date,seat,state,stduentID,startTime,finishTime;
     static int clickcount=0,usetime;
+    final int[] selected = {0};
 
 
     @Override
@@ -65,24 +68,6 @@ public class Reservation extends AppCompatActivity {
         },500);
     }
 
-
-    private void FirebaseRealTimeDataBase(View view){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras");
-        reference.child(terras).child(date).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    if(snapshot.child("seat").toString().equals("full")){
-
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
     public void btnTimeClick(View view) {
         LinearLayout linearLayout = findViewById(R.id.parentview);
         if(view == findViewById(R.id.btnreset)){
@@ -116,6 +101,65 @@ public class Reservation extends AppCompatActivity {
                 } else {
                     clickcount = 1;
                 }
+            }
+        }
+   }
+
+   public void reservationdialog(View view){
+       AlertDialog.Builder dialog = new AlertDialog.Builder(Reservation.this);
+       dialog.setTitle("사용하실 테라스 상태를 선택해주세요");
+       final String[] statearray = new String[]{"소음","조용"};
+       dialog.setSingleChoiceItems(statearray, 0, new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               selected[0] = which;
+           }
+       }).setPositiveButton("예약하기", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+               seat = "use";
+               if(selected[0] == 0){
+                   state = "소음";
+               }
+               else{
+                   state = "조용";
+               }
+               reservationtoDB();
+               myStartActivity(ReservationCheck.class);
+           }
+
+       }).setNegativeButton("취소하기", new DialogInterface.OnClickListener() {
+           @Override
+           public void onClick(DialogInterface dialog, int which) {
+
+           }
+       });
+       dialog.create();
+       dialog.show();
+
+   }
+
+   public void reservationtoDB(){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
+       stduentID = LogIn.studentID;
+
+        //아무것도 선택안했을 때
+        if(clickcount == 0){
+            showToast("예약할 시간을 선택해주세요");
+        }
+        //한시간짜리 예약
+        //empty에서 사용중으로 바꿈
+        else if(usetime==0){
+            reference.child(startTime).child(date).child("seat").setValue(seat);
+            reference.child(startTime).child(date).child("state").setValue(state);
+            reference.child(startTime).child(date).child("studentID").setValue(stduentID);
+        }
+        else{
+            for (int i = 0; i <= usetime; i++) {
+                String reservationctime= Integer.toString(Integer.parseInt(startTime) + i);
+                reference.child(reservationctime).child(date).child("seat").setValue("use");
+                reference.child(reservationctime).child(date).child("state").setValue(state);
+                reference.child(reservationctime).child(date).child("studentID").setValue(stduentID);
             }
         }
    }
