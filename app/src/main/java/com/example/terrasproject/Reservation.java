@@ -32,16 +32,17 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
-    static String terras,date,seat,state,stduentID,startTime,finishTime;
+    static String terras,date,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime;
     final int[] selected = {0};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_terras);
+
     }
+
     public void btnSeatClick(View view){
          terras = view.getTag().toString();
          showToast(terras);
@@ -58,23 +59,49 @@ public class Reservation extends AppCompatActivity {
     }
 
     public void btnDateClick(View view){
+
         date = view.getTag().toString();
         showToast(date);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 setContentView(R.layout.choose_time);
+                resetSeat();
+
             }
         },500);
     }
 
+
+    public void resetSeat(){
+        final LinearLayout timelinearLayout = findViewById(R.id.parentview);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    if(snapshot.child(date).child("seat").getValue().toString().equals("use")){
+                        timelinearLayout.findViewWithTag(snapshot.getKey()).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        timelinearLayout.findViewWithTag(snapshot.getKey()).setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
     public void btnTimeClick(View view) {
-        LinearLayout linearLayout = findViewById(R.id.parentview);
+        LinearLayout timelinearLayout = findViewById(R.id.parentview);
         if(view == findViewById(R.id.btnreset)){
                 clickcount=0;
                 for (int i = 9; i <= 21; i++) {
                     String middletime = Integer.toString(i);
-                    linearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#CCCCCC"));
+                   timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#CCCCCC"));
                 }
         }
         else {
@@ -92,7 +119,7 @@ public class Reservation extends AppCompatActivity {
                     if (usetime <= 5) {
                         for (int i = 1; i <= usetime; i++) {
                             String middletime = Integer.toString(Integer.parseInt(startTime) + i);
-                            linearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
                         }
                     } else {
                         showToast("최대 5시간까지 예약할 수 있습니다.");
@@ -106,60 +133,60 @@ public class Reservation extends AppCompatActivity {
    }
 
    public void reservationdialog(View view){
-       AlertDialog.Builder dialog = new AlertDialog.Builder(Reservation.this);
-       dialog.setTitle("사용하실 테라스 상태를 선택해주세요");
-       final String[] statearray = new String[]{"소음","조용"};
-       dialog.setSingleChoiceItems(statearray, 0, new DialogInterface.OnClickListener() {
-           @Override
-           public void onClick(DialogInterface dialog, int which) {
-               selected[0] = which;
-           }
-       }).setPositiveButton("예약하기", new DialogInterface.OnClickListener() {
-           @Override
-           public void onClick(DialogInterface dialog, int which) {
-               seat = "use";
-               if(selected[0] == 0){
-                   state = "소음";
-               }
-               else{
-                   state = "조용";
-               }
-               reservationtoDB();
-               myStartActivity(ReservationCheck.class);
-           }
+        if(clickcount!=0) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(Reservation.this);
+            dialog.setTitle("사용하실 테라스 상태를 선택해주세요");
+            final String[] statearray = new String[]{"소음", "조용"};
+            dialog.setSingleChoiceItems(statearray, 0, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    selected[0] = which;
+                }
+            }).setPositiveButton("예약하기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    seat = "use";
+                    if (selected[0] == 0) {
+                        state = "소음";
+                    } else {
+                        state = "조용";
+                    }
+                    reservationtoDB();
+                    myStartActivity(ReservationCheck.class);
+                }
 
-       }).setNegativeButton("취소하기", new DialogInterface.OnClickListener() {
-           @Override
-           public void onClick(DialogInterface dialog, int which) {
+            }).setNegativeButton("취소하기", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-           }
-       });
-       dialog.create();
-       dialog.show();
+                }
+            });
+            dialog.create();
+            dialog.show();
+        }
+        else{
+            showToast("예약할 시간을 선택해주세요");
+        }
 
    }
 
    public void reservationtoDB(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
-       stduentID = LogIn.studentID;
+       studentID = LogIn.studentID;
 
-        //아무것도 선택안했을 때
-        if(clickcount == 0){
-            showToast("예약할 시간을 선택해주세요");
-        }
         //한시간짜리 예약
         //empty에서 사용중으로 바꿈
-        else if(usetime==0){
+        if(usetime==0){
             reference.child(startTime).child(date).child("seat").setValue(seat);
             reference.child(startTime).child(date).child("state").setValue(state);
-            reference.child(startTime).child(date).child("studentID").setValue(stduentID);
+            reference.child(startTime).child(date).child("studentID").setValue(studentID);
         }
         else{
             for (int i = 0; i <= usetime; i++) {
                 String reservationctime= Integer.toString(Integer.parseInt(startTime) + i);
                 reference.child(reservationctime).child(date).child("seat").setValue("use");
                 reference.child(reservationctime).child(date).child("state").setValue(state);
-                reference.child(reservationctime).child(date).child("studentID").setValue(stduentID);
+                reference.child(reservationctime).child(date).child("studentID").setValue(studentID);
             }
         }
    }
