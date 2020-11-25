@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.qrcodescanbutton:
+                    myStartActivity(QRcode.class);
                     break;
 
                 case R.id.reportbutton:
