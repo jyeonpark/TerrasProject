@@ -28,12 +28,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
     static String terras,date,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime;
+    static Date current;
     final int[] selected = {0};
 
     @Override
@@ -132,7 +134,7 @@ public class Reservation extends AppCompatActivity {
         }
    }
 
-   public void reservationdialog(View view){
+    public void reservationdialog(View view){
         if(clickcount!=0) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(Reservation.this);
             dialog.setTitle("사용하실 테라스 상태를 선택해주세요");
@@ -152,6 +154,21 @@ public class Reservation extends AppCompatActivity {
                         state = "조용";
                     }
                     reservationtoDB();
+
+                    current = new Date();   ///현재시각 저장
+
+                    /* Timer_QR 로  데이터 보내기  */
+                    int success = 1;
+                    Intent intent_QR = new Intent(Reservation.this, Timer_QR.class);
+                    intent_QR.putExtra("success",success);
+                    startService(intent_QR);
+
+                    /* Timer_Reservation 로  데이터 보내기  */
+                    Intent intent_Reservation = new Intent(Reservation.this, Timer_Reservation.class);
+                    intent_Reservation.putExtra("usetime",usetime);
+                    startService(intent_Reservation);
+
+
                     myStartActivity(ReservationCheck.class);
                 }
 
@@ -168,7 +185,7 @@ public class Reservation extends AppCompatActivity {
             showToast("예약할 시간을 선택해주세요");
         }
 
-   }
+    }
 
    public void reservationtoDB(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
