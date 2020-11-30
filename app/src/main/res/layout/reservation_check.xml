@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical">
 
     <TextView
@@ -13,27 +14,192 @@
         android:textColorHint="#101010"
         android:textSize="15sp"
         android:textStyle="bold">
+
     </TextView>
-
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#50515A"
+        android:stretchColumns="*">
 
         <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="1"
+                android:background="#FFFFFF"
+                android:src="@drawable/warning">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            </ImageView>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="6"
+                android:background="#FFFFFF"
+                android:text=" 임시로 좌석이 배정되었습니다.
+               \n 배정을 확정하시려면 15분 이내에 QR코드 인증을 해주시기 바랍니다."
+                android:textColor="#322F2F"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+        </TableRow>
+
     </TableLayout>
 
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+
+        android:background="#50515A"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="좌석정보" />
+
+            <TextView
+                android:id="@+id/seatinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="2-2" />
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="입실시간" />
+
+            <TextView
+                android:id="@+id/starttimeinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="2-2" />
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="퇴실시간" />
+
+            <TextView
+                android:id="@+id/finishtimeinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="2-2" />
+        </TableRow>
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="사용자정보" />
+
+            <TextView
+                android:id="@+id/userinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="2-2" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TableRow
+            android:layout_margin="30dp">
+            <Button
+                android:id="@+id/btncompletereservation"
+                android:layout_width="150dp"
+                android:layout_margin="15dp"
+                android:layout_height="wrap_content"
+                android:text="배정 확정"
+                android:background="@drawable/shape">
+            </Button>
+            <Button
+                android:id="@+id/btncancelreservation"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="좌석 취소"
+                android:background="@drawable/shape2">
+            </Button>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

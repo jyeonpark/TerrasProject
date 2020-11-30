@@ -35,6 +35,7 @@ import java.util.Objects;
 public class Reservation extends AppCompatActivity {
     static String terras,date,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime;
+    static int reservationcheck = 0;
     static Date current;
     final int[] selected = {0};
 
@@ -154,6 +155,7 @@ public class Reservation extends AppCompatActivity {
                         state = "조용";
                     }
                     reservationtoDB();
+                    reservationcheck = 1;
 
                     current = new Date();   ///현재시각 저장
 
@@ -207,7 +209,10 @@ public class Reservation extends AppCompatActivity {
             }
         }
    }
-
+   @Override
+   public void onBackPressed(){
+       myStartActivity(MainActivity.class);
+   }
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
