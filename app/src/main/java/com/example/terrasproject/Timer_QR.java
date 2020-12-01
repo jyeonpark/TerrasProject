@@ -20,16 +20,22 @@ public class Timer_QR extends Service {
 
         if (intent == null) {
             return Service.START_STICKY;
-        } else {
+        }
+        else {
 
-            int status = intent.getIntExtra("success", 0);
+            final int status = intent.getIntExtra("success", 0);
+            final int status_QR = intent.getIntExtra("result",0);
 
             if (status == 1 && mThread == null) {
                 mThread = new Thread("Timer_QR") {
                     public void run() {
                         for (int i = 0; i < 15; i++) {
                             try {
-                                // 타이머 기능
+                                if(status_QR == 1){
+                                    break;                          // qr 성공시 타이머 중지
+                                }
+
+                                // 15분 지나면 db에서 삭제
 
                                 Thread.sleep(1000 * 60);
 

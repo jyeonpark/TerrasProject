@@ -6,28 +6,41 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.ShowableListMenu;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
     static String terras,date,seat,state,studentID,startTime,finishTime;
-    int clickcount=0,usetime;
-    static Date current;
+    static int clickcount=0,usetime;
     static int reservationcheck = 0;
+    static String strNow,strAfter;
     final int[] selected = {0};
 
     @Override
@@ -39,6 +52,7 @@ public class Reservation extends AppCompatActivity {
 
     public void btnSeatClick(View view){
          terras = view.getTag().toString();
+         showToast(terras);
          new Handler().postDelayed(new Runnable() {
                @Override
                public void run() {
@@ -54,6 +68,7 @@ public class Reservation extends AppCompatActivity {
     public void btnDateClick(View view){
 
         date = view.getTag().toString();
+        showToast(date);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -108,7 +123,7 @@ public class Reservation extends AppCompatActivity {
                 finishTime = view.getTag().toString();
                 usetime = Integer.parseInt(finishTime) - Integer.parseInt(startTime);
                 if (usetime > 0) {
-                    if (usetime <= 4) {
+                    if (usetime <= 5) {
                         for (int i = 1; i <= usetime; i++) {
                             String middletime = Integer.toString(Integer.parseInt(startTime) + i);
                             timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -123,6 +138,7 @@ public class Reservation extends AppCompatActivity {
             }
         }
    }
+
 
     public void reservationdialog(View view){
         if(clickcount!=0) {
@@ -147,7 +163,14 @@ public class Reservation extends AppCompatActivity {
                     storeInFile();
                     reservationcheck++;
 
-                    current = new Date();   ///현재시각 저장
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(new Date());
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    strNow =  df.format(cal.getTime());
+
+                    cal.add(Calendar.HOUR, usetime+1);
+                    strAfter =  df.format(cal.getTime());
+
 
                     /* Timer_QR 로  데이터 보내기  */
                     int success = 1;
@@ -179,6 +202,36 @@ public class Reservation extends AppCompatActivity {
         }
 
     }
+
+
+
+
+
+                    /*현재 시간 데이터 생성
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+
+                    SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    strNow = sdfNow.format(now);
+
+                    /*3시간 뒤 데이터
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(date); // 10분 더하기
+                    cal.add(Calendar.HOUR, 3);
+
+                    today = sdformat.format(cal.getTime()); */
+
+
+
+
+                    /* Timer_Reservation 로  데이터 보내기
+                    Intent intent_Reservation = new Intent(Reservation.this, Timer_Reservation.class);
+                    intent_Reservation.putExtra("usetime",usetime);
+                    startService(intent_Reservation);
+                    myStartActivity(ShowReservation.class);  */
+
+
+
 
    public void reservationtoDB(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
@@ -218,6 +271,9 @@ public class Reservation extends AppCompatActivity {
         editor.putString("date"+studentID, date);
         editor.putString("startTime"+studentID, startTime);
         editor.putInt("usetime"+studentID, usetime);// key, value를 이용하여 저장하는 형태
+        editor.putString("strNow"+studentID,strNow);
+        editor.putString("strAfter"+studentID,strAfter);
+
 
         //최종 커밋
         editor.commit();
@@ -232,7 +288,6 @@ public class Reservation extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
     private void showToast(String msg)
     {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();

@@ -66,7 +66,16 @@ public class QRcode extends AppCompatActivity {
     //Getting the scan results
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
+
+
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+        Intent intent_QR_result = new Intent(QRcode.this,Timer_QR.class);
+        intent_QR_result.putExtra("result", String.valueOf(result));
+        startService(intent_QR_result);
+
+
+
         if (result != null) {
             //qrcode 가 없으면
             if (result.getContents() == null) {

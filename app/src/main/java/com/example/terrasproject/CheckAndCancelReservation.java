@@ -20,6 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import static com.example.terrasproject.Reservation.strAfter;
+import static com.example.terrasproject.Reservation.strNow;
+
 public class CheckAndCancelReservation extends AppCompatActivity {
     static String terras,date,startTime;
     static int usetime;
@@ -52,12 +55,12 @@ public class CheckAndCancelReservation extends AppCompatActivity {
 
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
-        starttime.setText("");
+        starttime.setText(strNow);
 
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText("");
+        finishtime.setText(strAfter);
     }
 
     //퇴실하기(예 버튼)
@@ -82,6 +85,7 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         startTime = sp.getString("startTime"+LogIn.studentID,"");
         usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
+
         //DB에서 정보없애기
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
         for (int i = 0; i <= usetime; i++) {
@@ -100,6 +104,9 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         editor.remove("date"+LogIn.studentID);
         editor.remove("startTime"+LogIn.studentID);
         editor.remove("usetime"+LogIn.studentID);
+        editor.remove("strNow"+LogIn.studentID);
+        editor.remove("strAfter"+LogIn.studentID);
+
         editor.commit();
 
         //최종 커밋

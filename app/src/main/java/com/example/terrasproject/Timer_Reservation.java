@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import static android.content.ContentValues.TAG;
+import static com.example.terrasproject.Reservation.date;
+import static com.example.terrasproject.Reservation.startTime;
+import static com.example.terrasproject.Reservation.terras;
+import static com.example.terrasproject.Reservation.usetime;
 
 public class Timer_Reservation extends Service {
 
     private Thread mThread;
-
-    private int mCount = 0;
-    private int usetime = 0;
 
     public Timer_Reservation() {
     }
@@ -23,23 +27,24 @@ public class Timer_Reservation extends Service {
             return Service.START_STICKY;
         } else {
 
-            final int usetime = intent.getIntExtra("usetime", 0);
 
             if ( usetime > 0 && mThread == null) {
                 mThread = new Thread("Timer_QR") {
                     public void run() {
-                        for (int i = 0; i < usetime; i++) {
-                            try {
-                                // 타이머 기능
 
-                                Thread.sleep(1000 * 60 * 60  );
-
-
-                            } catch (InterruptedException e) {
-                                break;
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
+                            for (int i = 0; i <= usetime; i++) {
+                                String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
+                                reference.child(reservationctime).child(date).child("seat").setValue("empty");
+                                reference.child(reservationctime).child(date).child("state").setValue("empty");
+                                reference.child(reservationctime).child(date).child("studentID").setValue("empty");
                             }
-                            Log.d("timer", "timer running" + i);
-                        }
+
+                            reference = FirebaseDatabase.getInstance().getReference().child("Student");
+                            reference.child(LogIn.studentID).child("reservation").setValue("empty");
+
+                            Log.d("timer", "timer running" );
+
                     }
                 };
                 mThread.start();
