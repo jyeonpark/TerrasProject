@@ -11,12 +11,7 @@
         android:orientation="vertical">
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="385dp"
-            android:layout_height="128dp"
-            android:orientation="vertical"
-            android:src="@drawable/logo" />
+
 
         <TextView
             android:id="@+id/text"

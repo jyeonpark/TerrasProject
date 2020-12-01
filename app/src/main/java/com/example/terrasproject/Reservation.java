@@ -6,41 +6,31 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.ShowableListMenu;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
     static String terras,date,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime;
     static int reservationcheck = 0;
-    static String strNow,strAfter;
+    static String currentTime, closeTime;
     final int[] selected = {0};
 
     @Override
@@ -166,10 +156,10 @@ public class Reservation extends AppCompatActivity {
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(new Date());
                     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    strNow =  df.format(cal.getTime());
+                    currentTime =  df.format(cal.getTime());
 
                     cal.add(Calendar.HOUR, usetime+1);
-                    strAfter =  df.format(cal.getTime());
+                    closeTime =  df.format(cal.getTime());
 
 
                     /* Timer_QR 로  데이터 보내기  */
@@ -271,8 +261,8 @@ public class Reservation extends AppCompatActivity {
         editor.putString("date"+studentID, date);
         editor.putString("startTime"+studentID, startTime);
         editor.putInt("usetime"+studentID, usetime);// key, value를 이용하여 저장하는 형태
-        editor.putString("strNow"+studentID,strNow);
-        editor.putString("strAfter"+studentID,strAfter);
+        editor.putString("strNow"+studentID, currentTime);
+        editor.putString("strAfter"+studentID, closeTime);
 
 
         //최종 커밋

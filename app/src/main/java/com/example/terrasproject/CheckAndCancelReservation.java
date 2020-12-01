@@ -2,9 +2,7 @@ package com.example.terrasproject;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,10 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
-import static com.example.terrasproject.Reservation.strAfter;
-import static com.example.terrasproject.Reservation.strNow;
+import static com.example.terrasproject.Reservation.closeTime;
+import static com.example.terrasproject.Reservation.currentTime;
 
 public class CheckAndCancelReservation extends AppCompatActivity {
     static String terras,date,startTime;
@@ -55,12 +51,12 @@ public class CheckAndCancelReservation extends AppCompatActivity {
 
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
-        starttime.setText(strNow);
+        starttime.setText(currentTime);
 
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(strAfter);
+        finishtime.setText(closeTime);
     }
 
     //퇴실하기(예 버튼)
@@ -104,8 +100,6 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         editor.remove("date"+LogIn.studentID);
         editor.remove("startTime"+LogIn.studentID);
         editor.remove("usetime"+LogIn.studentID);
-        editor.remove("strNow"+LogIn.studentID);
-        editor.remove("strAfter"+LogIn.studentID);
 
         editor.commit();
 
