@@ -11,9 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CheckAndCancelReservation"></activity>
-        <activity android:name=".LogIn">
+        <activity android:name=".UserInfo">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".CheckAndCancelReservation" />
+        <activity android:name=".LogIn"></activity>
         <activity android:name=".SignUp" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -24,7 +30,7 @@
         </activity>
         <activity android:name=".Reservation" />
         <activity android:name=".ShowReservation" />
-        <activity android:name=".QRcode"></activity>
+        <activity android:name=".QRcode" />
     </application>
 
 </manifest>

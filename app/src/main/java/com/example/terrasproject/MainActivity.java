@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.userinformationbutton:
+                        myStartActivity(UserInfo.class);
                         break;
 
                     case R.id.logoutbutton:

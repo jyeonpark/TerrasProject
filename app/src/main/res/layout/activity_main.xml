@@ -20,8 +20,10 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="예약하기"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp"
+            android:background="#9BD3DD"
+            android:textColor="#fff"
+            android:text="예약하기" />
 
 
         <Button
@@ -29,6 +31,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="#9BD3DD"
+            android:textColor="#fff"
             android:text="예약 확인 및 취소"
             android:layout_margin="15dp"/>
 
@@ -37,6 +41,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="#9BD3DD"
+            android:textColor="#fff"
             android:text="QR 코드 인증"
             android:layout_margin="15dp"/>
 
@@ -45,6 +51,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="#9BD3DD"
+            android:textColor="#fff"
             android:text="신고하기"
             android:layout_margin="15dp"/>
 
@@ -53,6 +61,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="#9BD3DD"
+            android:textColor="#fff"
             android:text="회원정보"
             android:layout_margin="15dp"/>
 
@@ -61,6 +71,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="#9BD3DD"
+            android:textColor="#fff"
             android:text="로그아웃"
             android:layout_margin="15dp"/>
 
