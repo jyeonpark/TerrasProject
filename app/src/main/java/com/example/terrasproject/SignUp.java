@@ -39,6 +39,7 @@ public class  SignUp extends AppCompatActivity {
         studentName = findViewById(R.id.studentName);
         phoneNumber = findViewById(R.id.phoneNumber);
 
+
         student = new Student();
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Student");
@@ -80,6 +81,7 @@ public class  SignUp extends AppCompatActivity {
     }
     void makeNewID(){
         reference.child(student.getStudentID()).setValue(student);
+        reference.child(student.getStudentID()).child("reservation").setValue("empty");
         showToast("회원가입완료");
         myStartActivity(LogIn.class);
     }

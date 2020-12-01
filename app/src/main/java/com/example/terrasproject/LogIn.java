@@ -1,24 +1,19 @@
 package com.example.terrasproject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
-
-import android.provider.ContactsContract;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
+
 import android.widget.Toast;
 
-import com.example.terrasproject.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +39,7 @@ public class LogIn extends AppCompatActivity {
 
       findViewById(R.id.loginButton).setOnClickListener(onClickListener);
       findViewById(R.id.signUpButton).setOnClickListener(onClickListener);
+
   }
 
   View.OnClickListener onClickListener = new View.OnClickListener(){
@@ -71,8 +67,8 @@ public class LogIn extends AppCompatActivity {
               if (datasnapshot.exists()) {
                   String systemPassword = datasnapshot.child(id).child("password").getValue(String.class);
                   if (systemPassword.equals(pw)) {
-                      showToast("로그인에 성공하였습니다.");
                       studentID = id;
+                      storeInFile();
                       myStartActivity(MainActivity.class);
                   } else {
                       showToast("비밀번호가 일치하지 않습니다.");
@@ -86,7 +82,22 @@ public class LogIn extends AppCompatActivity {
       });
   }
 
-  public void btnSignup_Click(){
+    public void storeInFile(){
+
+        //앱이 종료되도 데이터를 사용할 수 있게 함
+        SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
+
+        //저장을 하기위해 editor를 이용하여 값을 저장시켜준다.
+        SharedPreferences.Editor editor = sp.edit();
+       //id 저장
+        editor.putString("id", studentID);
+
+        //최종 커밋
+        editor.commit();
+    }
+
+
+    public void btnSignup_Click(){
       myStartActivity(SignUp.class);
   }
 
@@ -94,6 +105,14 @@ public class LogIn extends AppCompatActivity {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onBackPressed(){
+      moveTaskToBack(true);
+      finishAndRemoveTask();
+      android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     private void showToast(String msg)

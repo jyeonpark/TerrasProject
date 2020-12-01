@@ -2,6 +2,7 @@ package com.example.terrasproject;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,10 +34,10 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
-    static String terras,date,seat,state,studentID,startTime,finishTime;
-    static int clickcount=0,usetime;
-    static int reservationcheck = 0;
+    String terras,date,seat,state,studentID,startTime,finishTime;
+    int clickcount=0,usetime;
     static Date current;
+    static int reservationcheck = 0;
     final int[] selected = {0};
 
     @Override
@@ -48,7 +49,6 @@ public class Reservation extends AppCompatActivity {
 
     public void btnSeatClick(View view){
          terras = view.getTag().toString();
-         showToast(terras);
          new Handler().postDelayed(new Runnable() {
                @Override
                public void run() {
@@ -64,7 +64,6 @@ public class Reservation extends AppCompatActivity {
     public void btnDateClick(View view){
 
         date = view.getTag().toString();
-        showToast(date);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -119,7 +118,7 @@ public class Reservation extends AppCompatActivity {
                 finishTime = view.getTag().toString();
                 usetime = Integer.parseInt(finishTime) - Integer.parseInt(startTime);
                 if (usetime > 0) {
-                    if (usetime <= 5) {
+                    if (usetime <= 4) {
                         for (int i = 1; i <= usetime; i++) {
                             String middletime = Integer.toString(Integer.parseInt(startTime) + i);
                             timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -155,7 +154,8 @@ public class Reservation extends AppCompatActivity {
                         state = "조용";
                     }
                     reservationtoDB();
-                    reservationcheck = 1;
+                    storeInFile();
+                    reservationcheck++;
 
                     current = new Date();   ///현재시각 저장
 
@@ -172,6 +172,7 @@ public class Reservation extends AppCompatActivity {
 
 
                     myStartActivity(ReservationCheck.class);
+
                 }
 
             }).setNegativeButton("취소하기", new DialogInterface.OnClickListener() {
@@ -192,6 +193,7 @@ public class Reservation extends AppCompatActivity {
    public void reservationtoDB(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
        studentID = LogIn.studentID;
+       showToast(studentID);
 
         //한시간짜리 예약
         //empty에서 사용중으로 바꿈
@@ -208,7 +210,29 @@ public class Reservation extends AppCompatActivity {
                 reference.child(reservationctime).child(date).child("studentID").setValue(studentID);
             }
         }
+
+        //DB 학생정보에 예약한 테라스자리 저장 -> 중복 예약 막기위함
+        reference = FirebaseDatabase.getInstance().getReference().child("Student");
+        reference.child(studentID).child("reservation").setValue(terras);
    }
+
+    public void storeInFile(){
+
+        //앱이 종료되도 데이터를 사용할 수 있게 함
+        SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
+
+        //저장을 하기위해 editor를 이용하여 값을 저장시켜준다.
+        SharedPreferences.Editor editor = sp.edit();
+        //테라스와 날짜 정보 저장
+        editor.putString("terras", terras);
+        editor.putString("date", date);
+        editor.putString("startTime", startTime);
+        editor.putInt("usetime", usetime);// key, value를 이용하여 저장하는 형태
+
+        //최종 커밋
+        editor.commit();
+    }
+
    @Override
    public void onBackPressed(){
        myStartActivity(MainActivity.class);
@@ -218,6 +242,7 @@ public class Reservation extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
+
     private void showToast(String msg)
     {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();

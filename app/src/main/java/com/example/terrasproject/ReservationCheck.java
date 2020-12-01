@@ -1,8 +1,11 @@
 package com.example.terrasproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +21,18 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 public class ReservationCheck extends AppCompatActivity {
+    static String terras,date,startTime;
+    static int usetime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_check);
-        //좌석정보
-        TextView seat = findViewById(R.id.seatinfo);
-        seat.setText(Reservation.terras);
 
-        //사용자정보
+        //좌석정보, 사용자정보
+        final TextView seat = findViewById(R.id.seatinfo);
         final TextView user = findViewById(R.id.userinfo);
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -36,6 +41,7 @@ public class ReservationCheck extends AppCompatActivity {
                     if (snapshot.getKey().equals(LogIn.studentID)) {
                         user.setText(snapshot.child("studentName").getValue().toString() +  " "+
                                 snapshot.child("studentID").getValue().toString());
+                        seat.setText(snapshot.child("reservation").getValue().toString());
                     }
                 }
             }
@@ -54,6 +60,53 @@ public class ReservationCheck extends AppCompatActivity {
         finishtime.setText("");
     }
 
+    //배정확정
+    public void btncompletereservation(View view) {
+        myStartActivity(QRcode.class);
+    }
+
+    //배정취소
+    public void btncancelreservation(View view) {
+        cancleReservation();
+        showToast("좌석배정이 취소되었습니다.");
+    }
+
+    public void cancleReservation(){
+
+        SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
+
+        //앱이 종료되기 전의 데이터를 불러옴
+        terras = sp.getString("terras","");
+        date = sp.getString("date","");
+        startTime = sp.getString("startTime","");
+        usetime = sp.getInt("usetime",0);
+
+        //DB에서 정보없애기
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
+        for (int i = 0; i <= usetime; i++) {
+            String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
+            reference.child(reservationctime).child(date).child("seat").setValue("empty");
+            reference.child(reservationctime).child(date).child("state").setValue("empty");
+            reference.child(reservationctime).child(date).child("studentID").setValue("empty");
+        }
+
+        reference = FirebaseDatabase.getInstance().getReference().child("Student");
+        reference.child(LogIn.studentID).child("reservation").setValue("empty");
+
+        //파일에서 삭제하기
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove("terras");
+        editor.remove("date");
+        editor.remove("startTime");
+        editor.remove("usetime");
+        editor.commit();
+
+        //최종 커밋
+        editor.commit();
+
+    }
+
+
     @Override
     public void onBackPressed(){
         myStartActivity(MainActivity.class);
@@ -69,5 +122,6 @@ public class ReservationCheck extends AppCompatActivity {
     {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
+
 }
 

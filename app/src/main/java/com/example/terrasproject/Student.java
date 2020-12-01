@@ -8,12 +8,6 @@ public class Student {
 
     public Student(){}
 
-    public Student(String studentID, String password, String studentName,String phoneNumber){
-        this.studentID = studentID;
-        pw = password;
-        this.studentName = studentName;
-        this.phoneNumber = phoneNumber;
-    }
     public String getStudentID(){
         return studentID;
     }

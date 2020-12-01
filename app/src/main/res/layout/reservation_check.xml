@@ -190,7 +190,8 @@
                 android:layout_margin="15dp"
                 android:layout_height="wrap_content"
                 android:text="배정 확정"
-                android:background="@drawable/shape">
+                android:background="@drawable/shape"
+                android:onClick="btncompletereservation">
             </Button>
             <Button
                 android:id="@+id/btncancelreservation"
@@ -198,7 +199,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:text="좌석 취소"
-                android:background="@drawable/shape2">
+                android:background="@drawable/shape2"
+                android:onClick="btncancelreservation">
             </Button>
         </TableRow>
     </TableLayout>
