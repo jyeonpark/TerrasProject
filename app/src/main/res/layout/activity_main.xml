@@ -49,14 +49,6 @@
             android:layout_margin="15dp"/>
 
         <Button
-            android:id="@+id/cancelreservationbutton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="퇴실하기"
-            android:layout_margin="15dp"/>
-
-        <Button
             android:id="@+id/userinformationbutton"
             android:layout_width="300dp"
             android:layout_height="wrap_content"

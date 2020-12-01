@@ -4,11 +4,9 @@ import
         androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.reservationcheckbutton).setOnClickListener(onClickListener);
         findViewById(R.id.qrcodescanbutton).setOnClickListener(onClickListener);
         findViewById(R.id.reportbutton).setOnClickListener(onClickListener);
-        findViewById(R.id.cancelreservationbutton).setOnClickListener(onClickListener);
         findViewById(R.id.userinformationbutton).setOnClickListener(onClickListener);
         findViewById(R.id.logoutbutton).setOnClickListener(onClickListener);
 
@@ -62,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.reservationcheckbutton:
-                        myStartActivity(ReservationCheck.class);
+                        myStartActivity(CheckAndCancelReservation.class);
                         break;
 
                     case R.id.qrcodescanbutton:
@@ -70,9 +67,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.reportbutton:
-                        break;
-
-                    case R.id.cancelreservationbutton:
                         break;
 
                     case R.id.userinformationbutton:

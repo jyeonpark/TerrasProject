@@ -6,32 +6,22 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.ShowableListMenu;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Date;
-import java.util.Iterator;
-import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
     String terras,date,seat,state,studentID,startTime,finishTime;
@@ -171,7 +161,7 @@ public class Reservation extends AppCompatActivity {
                     startService(intent_Reservation);
 
 
-                    myStartActivity(ReservationCheck.class);
+                    myStartActivity(ShowReservation.class);
 
                 }
 
@@ -224,10 +214,10 @@ public class Reservation extends AppCompatActivity {
         //저장을 하기위해 editor를 이용하여 값을 저장시켜준다.
         SharedPreferences.Editor editor = sp.edit();
         //테라스와 날짜 정보 저장
-        editor.putString("terras", terras);
-        editor.putString("date", date);
-        editor.putString("startTime", startTime);
-        editor.putInt("usetime", usetime);// key, value를 이용하여 저장하는 형태
+        editor.putString("terras"+studentID, terras);
+        editor.putString("date"+studentID, date);
+        editor.putString("startTime"+studentID, startTime);
+        editor.putInt("usetime"+studentID, usetime);// key, value를 이용하여 저장하는 형태
 
         //최종 커밋
         editor.commit();
