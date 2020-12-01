@@ -34,7 +34,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 public class Reservation extends AppCompatActivity {
-    String terras,date,seat,state,studentID,startTime,finishTime;
+    static String terras,date,seat,state,studentID,startTime,finishTime;
     int clickcount=0,usetime;
     static Date current;
     static int reservationcheck = 0;
