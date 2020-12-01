@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CancelReservation"></activity>
+        <activity android:name=".CheckAndCancelReservation"></activity>
         <activity android:name=".LogIn">
         </activity>
         <activity android:name=".SignUp" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Reservation" />
-        <activity android:name=".ReservationCheck" />
+        <activity android:name=".ShowReservation" />
         <activity android:name=".QRcode"></activity>
     </application>
 

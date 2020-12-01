@@ -20,14 +20,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
-public class ReservationCheck extends AppCompatActivity {
+public class CheckAndCancelReservation extends AppCompatActivity {
     static String terras,date,startTime;
     static int usetime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reservation_check);
+        setContentView(R.layout.activity_cancelreservation);
 
         //좌석정보, 사용자정보
         final TextView seat = findViewById(R.id.seatinfo);
@@ -60,15 +60,16 @@ public class ReservationCheck extends AppCompatActivity {
         finishtime.setText("");
     }
 
-    //배정확정
-    public void btncompletereservation(View view) {
-        myStartActivity(QRcode.class);
-    }
-
-    //배정취소
-    public void btncancelreservation(View view) {
+    //퇴실하기(예 버튼)
+    public void btnyes(View view) {
         cancleReservation();
         showToast("좌석배정이 취소되었습니다.");
+        myStartActivity(MainActivity.class);
+    }
+
+    //아니오버튼
+    public void btnno(View view) {
+       myStartActivity(MainActivity.class);
     }
 
     public void cancleReservation(){
@@ -76,10 +77,10 @@ public class ReservationCheck extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
 
         //앱이 종료되기 전의 데이터를 불러옴
-        terras = sp.getString("terras","");
-        date = sp.getString("date","");
-        startTime = sp.getString("startTime","");
-        usetime = sp.getInt("usetime",0);
+        terras = sp.getString("terras"+LogIn.studentID,"");
+        date = sp.getString("date"+LogIn.studentID,"");
+        startTime = sp.getString("startTime"+LogIn.studentID,"");
+        usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
         //DB에서 정보없애기
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
@@ -95,10 +96,10 @@ public class ReservationCheck extends AppCompatActivity {
 
         //파일에서 삭제하기
         SharedPreferences.Editor editor = sp.edit();
-        editor.remove("terras");
-        editor.remove("date");
-        editor.remove("startTime");
-        editor.remove("usetime");
+        editor.remove("terras"+LogIn.studentID);
+        editor.remove("date"+LogIn.studentID);
+        editor.remove("startTime"+LogIn.studentID);
+        editor.remove("usetime"+LogIn.studentID);
         editor.commit();
 
         //최종 커밋
