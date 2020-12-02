@@ -9,7 +9,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.ContentValues.TAG;
-import static com.example.terrasproject.Reservation.date;
 import static com.example.terrasproject.Reservation.startTime;
 import static com.example.terrasproject.Reservation.terras;
 import static com.example.terrasproject.Reservation.usetime;
@@ -35,9 +34,9 @@ public class Timer_Reservation extends Service {
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
                             for (int i = 0; i <= usetime; i++) {
                                 String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
-                                reference.child(reservationctime).child(date).child("seat").setValue("empty");
-                                reference.child(reservationctime).child(date).child("state").setValue("empty");
-                                reference.child(reservationctime).child(date).child("studentID").setValue("empty");
+                                reference.child(reservationctime).child("today").child("seat").setValue("empty");
+                                reference.child(reservationctime).child("today").child("state").setValue("empty");
+                                reference.child(reservationctime).child("today").child("studentID").setValue("empty");
                             }
 
                             reference = FirebaseDatabase.getInstance().getReference().child("Student");

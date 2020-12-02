@@ -27,8 +27,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Reservation extends AppCompatActivity {
-    static String terras,date,seat,state,studentID,startTime,finishTime;
+    static String terras,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime;
+    static int flowcheck = 0;
     static int reservationcheck = 0;
     static String currentTime, closeTime;
     final int[] selected = {0};
@@ -43,32 +44,9 @@ public class Reservation extends AppCompatActivity {
     public void btnSeatClick(View view){
          terras = view.getTag().toString();
          showToast(terras);
-         new Handler().postDelayed(new Runnable() {
-               @Override
-               public void run() {
-                   setContentView(R.layout.choose_date);
-                   Button btntoday = findViewById(R.id.btntoday);
-                   Button btntomorrow = findViewById(R.id.btntomorrow);
-                   btntoday.setText(DateTimeUtil.getToday("yyyy-MM-dd"));
-                   btntomorrow.setText(DateTimeUtil.getTomorrow("yyyy-MM-dd"));
-               }
-           },500);
+        setContentView(R.layout.choose_time);
+        resetSeat();
     }
-
-    public void btnDateClick(View view){
-
-        date = view.getTag().toString();
-        showToast(date);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                setContentView(R.layout.choose_time);
-                resetSeat();
-
-            }
-        },500);
-    }
-
 
     public void resetSeat(){
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
@@ -77,7 +55,7 @@ public class Reservation extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    if(snapshot.child(date).child("seat").getValue().toString().equals("use")){
+                    if(snapshot.child("today").child("seat").getValue().toString().equals("use")){
                         timelinearLayout.findViewWithTag(snapshot.getKey()).setBackgroundColor(Color.parseColor("#FFFFFF"));
                         timelinearLayout.findViewWithTag(snapshot.getKey()).setEnabled(false);
                     }
@@ -89,17 +67,19 @@ public class Reservation extends AppCompatActivity {
 
             }
         });
+
     }
 
 
     public void btnTimeClick(View view) {
-        LinearLayout timelinearLayout = findViewById(R.id.parentview);
+        final LinearLayout timelinearLayout = findViewById(R.id.parentview);
         if(view == findViewById(R.id.btnreset)){
                 clickcount=0;
                 for (int i = 9; i <= 21; i++) {
                     String middletime = Integer.toString(i);
                    timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#CCCCCC"));
                 }
+                resetSeat();
         }
         else {
             clickcount++;
@@ -112,20 +92,44 @@ public class Reservation extends AppCompatActivity {
             else if (clickcount == 2) {
                 finishTime = view.getTag().toString();
                 usetime = Integer.parseInt(finishTime) - Integer.parseInt(startTime);
-                if (usetime > 0) {
-                    if (usetime <= 5) {
-                        for (int i = 1; i <= usetime; i++) {
-                            String middletime = Integer.toString(Integer.parseInt(startTime) + i);
-                            timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
-                        }
-                    } else {
-                        showToast("최대 5시간까지 예약할 수 있습니다.");
-                        clickcount--;
+
+                //그사이에 예약된 시간있으면 선택못함
+                allLoop:
+                for (int i = 1; i < usetime; i++) {
+                    String middletime = Integer.toString(Integer.parseInt(startTime) + i);
+                    if(!timelinearLayout.findViewWithTag(middletime).isEnabled()) {
+                        showToast("연속된 시간만 예약할 수 있습니다.");
+                        clickcount=0;
+                        timelinearLayout.findViewWithTag(startTime).setBackgroundColor(Color.parseColor("#CCCCCC"));
+                        flowcheck++;
+                        break allLoop;
                     }
-                } else {
-                    clickcount = 1;
                 }
+
+                new Handler().postDelayed(new Runnable() {  // 5초뒤에 AlertDialog 실행
+                    @Override
+                    public void run() {
+                        if (clickcount==2 && flowcheck == 0) {
+                            showToast("오 잘골랐네");
+                            if (usetime > 0) {
+                                if (usetime <= 5) {
+                                    for (int i = 1; i <= usetime; i++) {
+                                        String middletime = Integer.toString(Integer.parseInt(startTime) + i);
+                                        timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                                    }
+                                } else {
+                                    showToast("최대 5시간까지 예약할 수 있습니다.");
+                                    clickcount--;
+                                }
+                            }
+                            else {
+                                clickcount = 1;
+                            }
+                        }
+                    }
+                },2000);
             }
+            flowcheck=0;
         }
    }
 
@@ -231,16 +235,16 @@ public class Reservation extends AppCompatActivity {
         //한시간짜리 예약
         //empty에서 사용중으로 바꿈
         if(usetime==0){
-            reference.child(startTime).child(date).child("seat").setValue(seat);
-            reference.child(startTime).child(date).child("state").setValue(state);
-            reference.child(startTime).child(date).child("studentID").setValue(studentID);
+            reference.child(startTime).child("today").child("seat").setValue(seat);
+            reference.child(startTime).child("today").child("state").setValue(state);
+            reference.child(startTime).child("today").child("studentID").setValue(studentID);
         }
         else{
             for (int i = 0; i <= usetime; i++) {
                 String reservationctime= Integer.toString(Integer.parseInt(startTime) + i);
-                reference.child(reservationctime).child(date).child("seat").setValue("use");
-                reference.child(reservationctime).child(date).child("state").setValue(state);
-                reference.child(reservationctime).child(date).child("studentID").setValue(studentID);
+                reference.child(reservationctime).child("today").child("seat").setValue("use");
+                reference.child(reservationctime).child("today").child("state").setValue(state);
+                reference.child(reservationctime).child("today").child("studentID").setValue(studentID);
             }
         }
 
@@ -258,7 +262,6 @@ public class Reservation extends AppCompatActivity {
         SharedPreferences.Editor editor = sp.edit();
         //테라스와 날짜 정보 저장
         editor.putString("terras"+studentID, terras);
-        editor.putString("date"+studentID, date);
         editor.putString("startTime"+studentID, startTime);
         editor.putInt("usetime"+studentID, usetime);// key, value를 이용하여 저장하는 형태
         editor.putString("strNow"+studentID, currentTime);
@@ -268,6 +271,7 @@ public class Reservation extends AppCompatActivity {
         //최종 커밋
         editor.commit();
     }
+
 
    @Override
    public void onBackPressed(){

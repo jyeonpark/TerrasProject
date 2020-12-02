@@ -1,7 +1,6 @@
 package com.example.terrasproject;
 
-import
-        androidx.annotation.NonNull;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+import java.util.Calendar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //현재시간
+        showToast(Integer.toString(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)));
 
         //앱이 종료되기 전의 데이터를 불러옴
         SharedPreferences sf = getSharedPreferences("file", MODE_PRIVATE);

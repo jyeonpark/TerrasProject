@@ -77,7 +77,6 @@ public class CheckAndCancelReservation extends AppCompatActivity {
 
         //앱이 종료되기 전의 데이터를 불러옴
         terras = sp.getString("terras"+LogIn.studentID,"");
-        date = sp.getString("date"+LogIn.studentID,"");
         startTime = sp.getString("startTime"+LogIn.studentID,"");
         usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
@@ -86,9 +85,9 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
         for (int i = 0; i <= usetime; i++) {
             String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
-            reference.child(reservationctime).child(date).child("seat").setValue("empty");
-            reference.child(reservationctime).child(date).child("state").setValue("empty");
-            reference.child(reservationctime).child(date).child("studentID").setValue("empty");
+            reference.child(reservationctime).child("today").child("seat").setValue("empty");
+            reference.child(reservationctime).child("today").child("state").setValue("empty");
+            reference.child(reservationctime).child("today").child("studentID").setValue("empty");
         }
 
         reference = FirebaseDatabase.getInstance().getReference().child("Student");
@@ -97,7 +96,6 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         //파일에서 삭제하기
         SharedPreferences.Editor editor = sp.edit();
         editor.remove("terras"+LogIn.studentID);
-        editor.remove("date"+LogIn.studentID);
         editor.remove("startTime"+LogIn.studentID);
         editor.remove("usetime"+LogIn.studentID);
 
