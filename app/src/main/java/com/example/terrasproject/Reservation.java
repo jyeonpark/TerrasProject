@@ -49,6 +49,14 @@ public class Reservation extends AppCompatActivity {
 
     public void resetSeat(){
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
+        int hour = Calendar.HOUR_OF_DAY;
+        showToast("현재시각:"+Integer.toString(hour));
+        for(int i=9; i<=hour; i++){
+                Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
+                button.setBackgroundColor(Color.parseColor("#666666"));
+                button.setTextColor(Color.parseColor("#FFFFFF"));
+               button.setEnabled(false);
+        }
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

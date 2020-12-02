@@ -118,12 +118,12 @@
             android:gravity="center_vertical"
             android:background="#DFE0E1"
             android:layout_marginBottom="1dp"
-            android:text="\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<테라스 이용 안내>\n\n
+            android:text="\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t&lt;테라스 이용 안내&lt;\n\n
         *이용시간은 9:00 ~ 10:00 까지 입니다. \n
         *지정된 시간에만 사용해 주세요.\n
         *예약한 시간부터 15분이내에 QR코드를 인증해주세요.\n
         *QR코드를 인증하지 않을 시 예약이 자동 취소됩니다.\n
-        *이용하실 용도에 따라 <소음/조용> 을 선택해주세요.\n\n\n
+        *이용하실 용도에 따라 &lt;소음/조용&lt; 을 선택해주세요.\n\n
         ">
 
         </TextView>
@@ -132,7 +132,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/linearlayout"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_margin="40dp">
 
     <Button
@@ -142,7 +142,7 @@
         android:layout_gravity="center"
         android:layout_margin="1dp"
         android:background="@drawable/shape4"
-        android:text="신고하기"
+        android:text="신고하기\n여기부분좀 예쁘게해주세여.."
         android:textColor="#000"
         android:textStyle="normal" />
 
