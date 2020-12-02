@@ -2,6 +2,7 @@ package com.example.terrasproject;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -9,11 +10,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import static android.content.ContentValues.TAG;
-import static com.example.terrasproject.Reservation.startTime;
-import static com.example.terrasproject.Reservation.terras;
-import static com.example.terrasproject.Reservation.usetime;
 
 public class Timer_Reservation extends Service {
+
+    SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
+
+    //앱이 종료되기 전의 데이터를 불러옴
+    String terras = sp.getString("terras"+LogIn.studentID,"");
+    String startTime = sp.getString("startTime"+LogIn.studentID,"");
+    int usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
     private Thread mThread;
 

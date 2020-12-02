@@ -16,11 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static com.example.terrasproject.Reservation.closeTime;
-import static com.example.terrasproject.Reservation.currentTime;
 
 public class CheckAndCancelReservation extends AppCompatActivity {
-    static String terras,date,startTime;
+    static String terras,startTime;
     static int usetime;
 
     @Override
@@ -31,6 +29,17 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         //좌석정보, 사용자정보
         final TextView seat = findViewById(R.id.seatinfo);
         final TextView user = findViewById(R.id.userinfo);
+
+
+        SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
+
+        //앱이 종료되기 전의 데이터를 불러옴
+        terras = sp.getString("terras"+LogIn.studentID,"");
+        startTime = sp.getString("startTime"+LogIn.studentID,"");
+        usetime = sp.getInt("usetime"+LogIn.studentID,0);
+
+        showToast("startTime"+startTime);
+        showToast("usetime:"+Integer.toString(usetime));
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -51,12 +60,12 @@ public class CheckAndCancelReservation extends AppCompatActivity {
 
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
-        starttime.setText(currentTime);
+        starttime.setText(String.valueOf(startTime)+":00");
 
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(closeTime);
+        finishtime.setText(Integer.parseInt(startTime)+usetime+1+":00");
     }
 
     //퇴실하기(예 버튼)
@@ -79,7 +88,6 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         terras = sp.getString("terras"+LogIn.studentID,"");
         startTime = sp.getString("startTime"+LogIn.studentID,"");
         usetime = sp.getInt("usetime"+LogIn.studentID,0);
-
 
         //DB에서 정보없애기
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);

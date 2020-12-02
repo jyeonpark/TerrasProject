@@ -7,82 +7,168 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="70dp"
+        android:background="#4EBEF1"
+        android:gravity="center"
+        android:text="JAVA라 테라스"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#101010"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TableLayout
+        android:layout_below="@+id/textView"
+        android:id="@+id/tablelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="#50515A"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1.5dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="1"
+                android:background="#FFFFFF"
+                android:src="@drawable/person">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/maintext"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="6"
+                android:background="#FFFFFF"
+                android:textColor="#322F2F" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/tablelayout2"
+        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tablelayout"
+        android:background="#000">
+    <TableRow
+        android:background="#FFF"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="1dp">
+        <Button
+            android:id="@+id/reservationbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape3"
+            android:text="예약하기"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/reservationcheckbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape3"
+            android:text="예약 확인\n및 취소"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/qrcodescanbutton"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/shape3"
+            android:text="QR 코드 인증"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+    </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/textView">
+        android:id="@+id/linearlayout"
+        android:layout_below="@id/tablelayout2"
+        android:background="#000">
 
-        <Button
-            android:id="@+id/reservationbutton"
-            android:layout_width="300dp"
+
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="15dp"
-            android:background="#9BD3DD"
-            android:textColor="#fff"
-            android:text="예약하기" />
+            android:gravity="center_vertical"
+            android:background="#DFE0E1"
+            android:layout_marginBottom="1dp"
+            android:text="\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t<테라스 이용 안내>\n\n
+        *이용시간은 9:00 ~ 10:00 까지 입니다. \n
+        *지정된 시간에만 사용해 주세요.\n
+        *예약한 시간부터 15분이내에 QR코드를 인증해주세요.\n
+        *QR코드를 인증하지 않을 시 예약이 자동 취소됩니다.\n
+        *이용하실 용도에 따라 <소음/조용> 을 선택해주세요.\n\n\n
+        ">
 
+        </TextView>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/linearlayout"
+    android:orientation="vertical"
+    android:layout_margin="40dp">
 
-        <Button
-            android:id="@+id/reservationcheckbutton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#9BD3DD"
-            android:textColor="#fff"
-            android:text="예약 확인 및 취소"
-            android:layout_margin="15dp"/>
+    <Button
+        android:id="@+id/reportbutton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:background="@drawable/shape4"
+        android:text="신고하기"
+        android:textColor="#000"
+        android:textStyle="normal" />
 
-        <Button
-            android:id="@+id/qrcodescanbutton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#9BD3DD"
-            android:textColor="#fff"
-            android:text="QR 코드 인증"
-            android:layout_margin="15dp"/>
+    <Button
+        android:id="@+id/userinformationbutton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:background="@drawable/shape4"
+        android:text="회원정보"
+        android:textColor="#000"
+        android:textStyle="normal" />
 
-        <Button
-            android:id="@+id/reportbutton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#9BD3DD"
-            android:textColor="#fff"
-            android:text="신고하기"
-            android:layout_margin="15dp"/>
-
-        <Button
-            android:id="@+id/userinformationbutton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#9BD3DD"
-            android:textColor="#fff"
-            android:text="회원정보"
-            android:layout_margin="15dp"/>
-
-        <Button
-            android:id="@+id/logoutbutton"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="#9BD3DD"
-            android:textColor="#fff"
-            android:text="로그아웃"
-            android:layout_margin="15dp"/>
+    <Button
+        android:id="@+id/logoutbutton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="1dp"
+        android:background="@drawable/shape4"
+        android:text="로그아웃"
+        android:textColor="#000"
+        android:textStyle="normal" />
 
     </LinearLayout>
 
-    <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_gravity="bottom"
-            android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

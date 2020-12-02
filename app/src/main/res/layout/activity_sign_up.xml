@@ -8,17 +8,40 @@
     tools:context="com.example.terrasproject.SignUp">
 
 
-    <EditText
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#000"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#4EBEF1"
+                android:gravity="center"
+                android:layout_marginBottom="1dp"
+                android:text="회원가입"
+                android:textColor="#FFF"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+
+
+    <EditText
         android:id="@+id/studentID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:padding="20dp"
         android:hint="학번"
         android:inputType="number"
-        android:maxLength="8"/>
+        android:maxLength="8"
+        android:padding="20dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -51,23 +74,25 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/shape2"
         android:onClick="btnSignup_Click"
         android:padding="25dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:text="회원가입"/>
+        android:text="회원가입" />
 
     <Button
         android:id="@+id/signUpButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/shape"
         android:onClick="btnLogin_Click"
         android:padding="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:text="로그인"/>
+        android:text="로그인" />
 
 
 

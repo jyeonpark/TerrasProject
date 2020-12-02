@@ -16,17 +16,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import static com.example.terrasproject.Reservation.closeTime;
-import static com.example.terrasproject.Reservation.currentTime;
 
 public class ShowReservation extends AppCompatActivity {
-    static String terras,date,startTime;
+    static String terras,startTime;
     static int usetime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.reservation_check);
+
+        SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
+
+        //앱이 종료되기 전의 데이터를 불러옴
+        terras = sp.getString("terras"+LogIn.studentID,"");
+        startTime = sp.getString("startTime"+LogIn.studentID,"");
+        usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
         //좌석정보, 사용자정보
         final TextView seat = findViewById(R.id.seatinfo);
@@ -51,12 +56,12 @@ public class ShowReservation extends AppCompatActivity {
 
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
-        starttime.setText(currentTime);
+        starttime.setText(Integer.parseInt(Reservation.startTime)+":00");
 
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(closeTime);
+        finishtime.setText(Integer.parseInt(Reservation.startTime)+usetime+1+":00");
     }
 
     //배정확정
@@ -78,7 +83,7 @@ public class ShowReservation extends AppCompatActivity {
         //앱이 종료되기 전의 데이터를 불러옴
         terras = sp.getString("terras"+LogIn.studentID,"");
         startTime = sp.getString("startTime"+LogIn.studentID,"");
-
+        usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
         //DB에서 정보없애기
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);

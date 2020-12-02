@@ -8,11 +8,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="#C2D9DC"
+        android:background="#4EBEF1"
         android:gravity="center"
         android:text="예약 확인 및 좌석 취소"
+        android:textColor="#FFFFFF"
         android:textColorHint="#101010"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:textStyle="bold">
 
     </TextView>
@@ -62,9 +63,10 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
 
         android:background="#50515A"
         android:stretchColumns="*">
@@ -93,8 +95,7 @@
                 android:layout_span="5"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:textColor="#322F2F"
-                android:text="2-2" />
+                android:textColor="#322F2F" />
         </TableRow>
         <TableRow
             android:layout_width="wrap_content"
@@ -121,7 +122,7 @@
                 android:background="#FFFFFF"
                 android:gravity="center"
                 android:textColor="#322F2F"
-                android:text="2-2" />
+              />
         </TableRow>
         <TableRow
             android:layout_width="wrap_content"
@@ -148,7 +149,7 @@
                 android:background="#FFFFFF"
                 android:gravity="center"
                 android:textColor="#322F2F"
-                android:text="2-2" />
+                 />
         </TableRow>
         <TableRow
             android:layout_width="wrap_content"
@@ -175,7 +176,7 @@
                 android:background="#FFFFFF"
                 android:gravity="center"
                 android:textColor="#322F2F"
-                android:text="2-2" />
+                />
         </TableRow>
     </TableLayout>
 

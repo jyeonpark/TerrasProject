@@ -9,4 +9,13 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="terras2_1">"terras2-1"</string>
+    <string name="terras2_2">"terras2-2"</string>
+    <string name="terras2_3">"terras2-3"</string>
+    <string name="terras3_1">"terras3-1"</string>
+    <string name="terras3_2">"terras3_2"</string>
+    <string name="terras3_3">"terras3_3"</string>
+    <string name="terras4_1">"terras4-1"</string>
+    <string name="terras4_2">"terras4_2"</string>
+    <string name="terras4_3">"terras4_3"</string>
 </resources>

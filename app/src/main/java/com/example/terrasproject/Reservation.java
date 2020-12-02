@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,9 +30,8 @@ import java.util.Date;
 public class Reservation extends AppCompatActivity {
     static String terras,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime;
-    static int flowcheck = 0;
-    static int reservationcheck = 0;
-    static String currentTime, closeTime;
+    int flowcheck = 0;
+
     final int[] selected = {0};
 
     @Override
@@ -43,7 +43,6 @@ public class Reservation extends AppCompatActivity {
 
     public void btnSeatClick(View view){
          terras = view.getTag().toString();
-         showToast(terras);
         setContentView(R.layout.choose_time);
         resetSeat();
     }
@@ -56,7 +55,9 @@ public class Reservation extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if(snapshot.child("today").child("seat").getValue().toString().equals("use")){
-                        timelinearLayout.findViewWithTag(snapshot.getKey()).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        Button button = timelinearLayout.findViewWithTag(snapshot.getKey());
+                        button.setBackgroundColor(Color.parseColor("#666666"));
+                        button.setTextColor(Color.parseColor("#FFFFFF"));
                         timelinearLayout.findViewWithTag(snapshot.getKey()).setEnabled(false);
                     }
                 }
@@ -71,13 +72,16 @@ public class Reservation extends AppCompatActivity {
     }
 
 
-    public void btnTimeClick(View view) {
+    public void btnTimeClick(View v) {
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
+        Button view = (Button) v;
         if(view == findViewById(R.id.btnreset)){
                 clickcount=0;
                 for (int i = 9; i <= 21; i++) {
                     String middletime = Integer.toString(i);
-                   timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#CCCCCC"));
+                    Button button = timelinearLayout.findViewWithTag(middletime);
+                   button.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                   button.setTextColor(Color.parseColor("#000000"));
                 }
                 resetSeat();
         }
@@ -86,7 +90,8 @@ public class Reservation extends AppCompatActivity {
             //시작시간버튼
             if (clickcount == 1) {
                 startTime = view.getTag().toString();
-                view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                view.setBackgroundColor(Color.parseColor("#4EBEF1"));
+                view.setTextColor(Color.parseColor("#FFFFFF"));
             }
             //끝시간버튼
             else if (clickcount == 2) {
@@ -100,22 +105,20 @@ public class Reservation extends AppCompatActivity {
                     if(!timelinearLayout.findViewWithTag(middletime).isEnabled()) {
                         showToast("연속된 시간만 예약할 수 있습니다.");
                         clickcount=0;
-                        timelinearLayout.findViewWithTag(startTime).setBackgroundColor(Color.parseColor("#CCCCCC"));
+                        timelinearLayout.findViewWithTag(startTime).setBackgroundColor(Color.parseColor("#FFFFFF"));
                         flowcheck++;
                         break allLoop;
                     }
                 }
 
-                new Handler().postDelayed(new Runnable() {  // 5초뒤에 AlertDialog 실행
-                    @Override
-                    public void run() {
                         if (clickcount==2 && flowcheck == 0) {
-                            showToast("오 잘골랐네");
                             if (usetime > 0) {
                                 if (usetime <= 5) {
                                     for (int i = 1; i <= usetime; i++) {
                                         String middletime = Integer.toString(Integer.parseInt(startTime) + i);
-                                        timelinearLayout.findViewWithTag(middletime).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                                        Button button = timelinearLayout.findViewWithTag(middletime);
+                                        button.setBackgroundColor(Color.parseColor("#4EBEF1"));
+                                        button.setTextColor(Color.parseColor("#FFFFFF"));
                                     }
                                 } else {
                                     showToast("최대 5시간까지 예약할 수 있습니다.");
@@ -126,8 +129,6 @@ public class Reservation extends AppCompatActivity {
                                 clickcount = 1;
                             }
                         }
-                    }
-                },2000);
             }
             flowcheck=0;
         }
@@ -155,16 +156,8 @@ public class Reservation extends AppCompatActivity {
                     }
                     reservationtoDB();
                     storeInFile();
-                    reservationcheck++;
-
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(new Date());
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    currentTime =  df.format(cal.getTime());
-
-                    cal.add(Calendar.HOUR, usetime+1);
-                    closeTime =  df.format(cal.getTime());
-
+                    clickcount=0;
+                    flowcheck=0;
 
                     /* Timer_QR 로  데이터 보내기  */
                     int success = 1;
@@ -230,7 +223,6 @@ public class Reservation extends AppCompatActivity {
    public void reservationtoDB(){
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
        studentID = LogIn.studentID;
-       showToast(studentID);
 
         //한시간짜리 예약
         //empty에서 사용중으로 바꿈
@@ -254,7 +246,6 @@ public class Reservation extends AppCompatActivity {
    }
 
     public void storeInFile(){
-
         //앱이 종료되도 데이터를 사용할 수 있게 함
         SharedPreferences sp = getSharedPreferences("file", MODE_PRIVATE);
 
@@ -264,9 +255,6 @@ public class Reservation extends AppCompatActivity {
         editor.putString("terras"+studentID, terras);
         editor.putString("startTime"+studentID, startTime);
         editor.putInt("usetime"+studentID, usetime);// key, value를 이용하여 저장하는 형태
-        editor.putString("strNow"+studentID, currentTime);
-        editor.putString("strAfter"+studentID, closeTime);
-
 
         //최종 커밋
         editor.commit();
