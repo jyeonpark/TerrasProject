@@ -43,7 +43,7 @@ public class Timer_QR extends Service {
                             try {
                                 if(ShowReservation.status == 1)
                                     break;                          // qr 성공시 타이머 중지
-                                Thread.sleep(1000 );
+                                Thread.sleep(1000 * 60);
                             } catch (InterruptedException e) {
                                 break;
                             }
