@@ -32,13 +32,13 @@ public class Timer_Reservation extends Service {
             final int trash = intent.getIntExtra("reservation", 0);
 
 
-            if ( ShowReservation.usetime > 0 && mThread == null) {
+            if ( ShowReservation.status == 0 && mThread == null) {
                 mThread = new Thread("Timer_QR") {
                     public void run() {
 
-                        for (int i = 0; i < ShowReservation.usetime; i++) {
+                        for (int i = 0; i < ShowReservation.usetime+1; i++) {
                             try {
-                                Thread.sleep(1000 );
+                                Thread.sleep(1000 * 60 * 60  );
                             } catch (InterruptedException e) {
                                 break;
                             }

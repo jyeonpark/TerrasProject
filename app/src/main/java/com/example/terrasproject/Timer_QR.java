@@ -43,12 +43,12 @@ public class Timer_QR extends Service {
                             try {
                                 if(ShowReservation.status == 1)
                                     break;                          // qr 성공시 타이머 중지
-                                Thread.sleep(1000 * 60);
+                                Thread.sleep(1000 * 60 );
                             } catch (InterruptedException e) {
                                 break;
                             }
 
-                            Log.d("timer", "timer running" + i);
+                            Log.d("timer_QR", "timer running" + i);
                         }
                         if(ShowReservation.status == 0) {
                             cancleReservation();
@@ -76,10 +76,14 @@ public class Timer_QR extends Service {
         //DB에서 정보없애기
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
         for (int i = 0; i <= usetime; i++) {
-            String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
-            reference.child(reservationctime).child("today").child("seat").setValue("empty");
-            reference.child(reservationctime).child("today").child("state").setValue("empty");
-            reference.child(reservationctime).child("today").child("studentID").setValue("empty");
+            try {
+                String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
+                reference.child(reservationctime).child("today").child("seat").setValue("empty");
+                reference.child(reservationctime).child("today").child("state").setValue("empty");
+                reference.child(reservationctime).child("today").child("studentID").setValue("empty");
+            }catch(NumberFormatException e){
+
+            }
         }
 
         reference = FirebaseDatabase.getInstance().getReference().child("Student");
