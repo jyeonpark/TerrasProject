@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ShowReservation extends AppCompatActivity {
     static String terras,startTime;
     static int usetime;
+    static int status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +63,22 @@ public class ShowReservation extends AppCompatActivity {
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
         finishtime.setText(Integer.parseInt(Reservation.startTime)+usetime+1+":00");
+
+        Intent intent = new Intent(ShowReservation.this,Timer_QR.class);
+        intent.putExtra("status",status);
+        startService(intent);
+
+
+
+
     }
 
     //배정확정
     public void btncompletereservation(View view) {
         myStartActivity(QRcode.class);
+
+
+
     }
 
     //배정취소

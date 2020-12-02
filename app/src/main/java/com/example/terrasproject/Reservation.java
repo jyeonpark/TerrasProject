@@ -29,7 +29,7 @@ import java.util.Date;
 
 public class Reservation extends AppCompatActivity {
     static String terras,seat,state,studentID,startTime,finishTime;
-    static int clickcount=0,usetime;
+    static int clickcount=0,usetime,reservation;
     int flowcheck = 0;
 
     final int[] selected = {0};
@@ -159,17 +159,11 @@ public class Reservation extends AppCompatActivity {
                     clickcount=0;
                     flowcheck=0;
 
-                    /* Timer_QR 로  데이터 보내기  */
-                    int success = 1;
-                    Intent intent_QR = new Intent(Reservation.this, Timer_QR.class);
-                    intent_QR.putExtra("success",success);
-                    startService(intent_QR);
 
                     /* Timer_Reservation 로  데이터 보내기  */
-                    Intent intent_Reservation = new Intent(Reservation.this, Timer_Reservation.class);
-                    intent_Reservation.putExtra("usetime",usetime);
-                    startService(intent_Reservation);
-
+                    Intent intent = new Intent(Reservation.this,Timer_Reservation.class);
+                    intent.putExtra("reservation",reservation);
+                    startService(intent);
 
                     myStartActivity(ShowReservation.class);
 
@@ -189,33 +183,6 @@ public class Reservation extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
-                    /*현재 시간 데이터 생성
-                    long now = System.currentTimeMillis();
-                    Date date = new Date(now);
-
-                    SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                    strNow = sdfNow.format(now);
-
-                    /*3시간 뒤 데이터
-                    Calendar cal = Calendar.getInstance();
-                    cal.setTime(date); // 10분 더하기
-                    cal.add(Calendar.HOUR, 3);
-
-                    today = sdformat.format(cal.getTime()); */
-
-
-
-
-                    /* Timer_Reservation 로  데이터 보내기
-                    Intent intent_Reservation = new Intent(Reservation.this, Timer_Reservation.class);
-                    intent_Reservation.putExtra("usetime",usetime);
-                    startService(intent_Reservation);
-                    myStartActivity(ShowReservation.class);  */
 
 
 

@@ -2,6 +2,7 @@ package com.example.terrasproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -93,8 +94,8 @@ public class QRcode extends AppCompatActivity {
 
                 if (textViewName.getText().toString().equals(textViewResult.getText().toString())) {
                     Toast.makeText(QRcode.this, "예약완료!", Toast.LENGTH_SHORT).show();
-
                     //타이머 끄기 기능 넣기
+                    ShowReservation.status = 1;
                 }
                 else{
                     Toast.makeText(QRcode.this, "예약실패!", Toast.LENGTH_SHORT).show();
