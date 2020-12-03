@@ -1,9 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserInfo">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#4EBEF1"
+        android:gravity="center"
+        android:text="사용자 정보 확인"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#101010"
+        android:textSize="20sp"
+        android:textStyle="bold">
+
+    </TextView>
+
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="30dp"
+
+        android:background="#50515A"
+        android:stretchColumns="*">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="이름" />
+
+            <TextView
+                android:id="@+id/nameinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="학번" />
+
+            <TextView
+                android:id="@+id/numinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="전화번호" />
+
+            <TextView
+                android:id="@+id/phoneinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:text="사용 좌석"
+                android:textColor="#322F2F" />
+
+            <TextView
+                android:id="@+id/nowseatinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:layout_span="2"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                android:text="벌점현황" />
+
+            <TextView
+                android:id="@+id/pointinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="1dp"
+                android:layout_span="5"
+                android:background="#FFFFFF"
+                android:gravity="center"
+                android:textColor="#322F2F"
+                />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <TableRow
+            android:layout_margin="30dp"
+            android:layout_gravity="center">
+            <Button
+                android:id="@+id/btcheckuserinfo"
+                android:layout_width="150dp"
+                android:layout_margin="15dp"
+                android:layout_height="wrap_content"
+                android:text="확인"
+                android:textColor="#fff"
+                android:textStyle="bold"
+                android:background="@drawable/shape"
+                android:onClick="btcheckuserinfo">
+            </Button>
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
