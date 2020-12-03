@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UserInfo">
-        </activity>
+        <activity android:name=".feedback"></activity>
+        <activity android:name=".UserInfo"></activity>
         <activity android:name=".CheckAndCancelReservation" />
-        <activity android:name=".LogIn"></activity>
+        <activity android:name=".LogIn" />
         <activity android:name=".SignUp" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".Reservation" />
         <activity android:name=".ShowReservation" />
+
         <service android:name=".Timer_QR" />
         <service android:name=".Timer_Reservation" />
 

@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.reportbutton:
+                        myStartActivity(feedback.class);
                         break;
 
                     case R.id.userinformationbutton:
