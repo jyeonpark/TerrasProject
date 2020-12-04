@@ -73,7 +73,7 @@ public class CheckAndCancelReservation extends AppCompatActivity {
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(date + "   "+Integer.parseInt(startTime)+usetime+1+":00");
+        finishtime.setText(date + "   "+Integer.toString(Integer.parseInt(startTime)+usetime+1)+":00");
     }
 
     //퇴실하기(예 버튼)
