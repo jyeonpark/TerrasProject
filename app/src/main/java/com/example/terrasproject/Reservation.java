@@ -242,6 +242,8 @@ public class Reservation extends AppCompatActivity {
    @Override
    public void onBackPressed(){
        myStartActivity(MainActivity.class);
+       clickcount=0;
+       flowcheck=0;
    }
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
