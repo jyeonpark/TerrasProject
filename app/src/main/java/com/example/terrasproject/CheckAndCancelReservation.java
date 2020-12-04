@@ -16,6 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class CheckAndCancelReservation extends AppCompatActivity {
     static String terras,startTime;
@@ -58,14 +61,19 @@ public class CheckAndCancelReservation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(new Date());
+
+
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
-        starttime.setText(String.valueOf(startTime)+":00");
+        starttime.setText(date + "   " +String.valueOf(startTime)+":00");
 
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(Integer.parseInt(startTime)+usetime+1+":00");
+        finishtime.setText(date + "   "+Integer.parseInt(startTime)+usetime+1+":00");
     }
 
     //퇴실하기(예 버튼)

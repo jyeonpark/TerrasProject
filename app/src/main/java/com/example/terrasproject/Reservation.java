@@ -32,6 +32,9 @@ public class Reservation extends AppCompatActivity {
     static int clickcount=0,usetime,reservation;
     int flowcheck = 0;
 
+    SimpleDateFormat format_hour = new SimpleDateFormat("kk");
+    String date = format_hour.format(new Date());
+
     final int[] selected = {0};
 
     @Override
@@ -49,7 +52,7 @@ public class Reservation extends AppCompatActivity {
 
     public void resetSeat(){
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
-        int hour = Calendar.HOUR_OF_DAY;
+        int hour = Integer.parseInt(date);
         showToast("현재시각:"+Integer.toString(hour));
         for(int i=9; i<=hour; i++){
                 Button button = timelinearLayout.findViewWithTag(Integer.toString(i));

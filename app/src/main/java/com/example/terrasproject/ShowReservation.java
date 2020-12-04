@@ -1,5 +1,6 @@
 package com.example.terrasproject;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,12 +17,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class ShowReservation extends AppCompatActivity {
     static String terras,startTime;
     static int usetime;
     static int status;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,14 +61,18 @@ public class ShowReservation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String date = format.format(new Date());
+
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
-        starttime.setText(Integer.parseInt(Reservation.startTime)+":00");
+        starttime.setText(date +"   " + String.valueOf(startTime)+":00");
 
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(Integer.parseInt(Reservation.startTime)+usetime+1+":00");
+        finishtime.setText(date +"   " + Integer.parseInt(startTime)+usetime+1+":00");
 
         Intent intent = new Intent(ShowReservation.this,Timer_QR.class);
         intent.putExtra("status",status);
