@@ -49,9 +49,9 @@
 
             <Button
                 android:id="@+id/terras4-1"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -60,9 +60,9 @@
 
             <Button
                 android:id="@+id/terras4-2"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -71,9 +71,9 @@
 
             <Button
                 android:id="@+id/terras4-3"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -82,9 +82,9 @@
 
             <Button
                 android:id="@+id/terras3-1"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -93,9 +93,9 @@
 
             <Button
                 android:id="@+id/terras3-2"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -104,9 +104,9 @@
 
             <Button
                 android:id="@+id/terras3-3"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -115,9 +115,9 @@
 
             <Button
                 android:id="@+id/terras2-1"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -126,9 +126,9 @@
 
             <Button
                 android:id="@+id/terras2-2"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"
@@ -137,9 +137,9 @@
 
             <Button
                 android:id="@+id/terras2-3"
-                android:layout_width="95dp"
+                android:layout_width="92dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="14dp"
+                android:layout_margin="12dp"
                 android:background="#FFF"
                 android:onClick="btnSeatClick"
                 android:padding="15dp"

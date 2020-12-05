@@ -173,18 +173,18 @@
 
             <Button
                 android:id="@+id/btnyes"
-                android:layout_width="150dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="12dp"
                 android:background="@drawable/shape"
                 android:onClick="btnyes"
                 android:text="예"></Button>
 
             <Button
                 android:id="@+id/btnno"
-                android:layout_width="150dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="12dp"
                 android:background="@drawable/shape2"
                 android:onClick="btnno"
                 android:text="아니오"></Button>

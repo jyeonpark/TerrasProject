@@ -26,11 +26,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Reservation extends AppCompatActivity {
     static String terras,seat,state,studentID,startTime,finishTime;
     static int clickcount=0,usetime,reservation;
     int flowcheck = 0;
+
+    SimpleDateFormat format_hour = new SimpleDateFormat("kk");
+    String date = format_hour.format(new Date());
 
     final int[] selected = {0};
 
@@ -48,15 +52,16 @@ public class Reservation extends AppCompatActivity {
     }
 
     public void resetSeat(){
-        final LinearLayout timelinearLayout = findViewById(R.id.parentview);
-        int hour = Calendar.HOUR_OF_DAY;
+        final LinearLayout timelinearLayout = findViewById(R.id.parentview);;
+        int hour = Integer.parseInt(date);
         showToast("현재시각:"+Integer.toString(hour));
-        for(int i=9; i<=hour; i++){
-                Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
-                button.setBackgroundColor(Color.parseColor("#666666"));
-                button.setTextColor(Color.parseColor("#FFFFFF"));
-               button.setEnabled(false);
+        for(int i =9; i<=hour; i++){
+            Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
+            button.setBackgroundColor(Color.parseColor("#666666"));
+            button.setTextColor(Color.parseColor("#FFFFFF"));
+            button.setEnabled(false);
         }
+
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -72,9 +77,7 @@ public class Reservation extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
 
     }
