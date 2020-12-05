@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class CheckAndCancelReservation extends AppCompatActivity {
@@ -60,8 +61,10 @@ public class CheckAndCancelReservation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(new Date());
+
 
         //입실시간
         TextView starttime = findViewById(R.id.starttimeinfo);
@@ -71,7 +74,6 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
         finishtime.setText(date + "   "+Integer.toString(Integer.parseInt(startTime)+usetime+1)+":00");
-
     }
 
     //퇴실하기(예 버튼)

@@ -7,9 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +16,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class ShowReservation extends AppCompatActivity {
@@ -60,6 +61,7 @@ public class ShowReservation extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {}
         });
 
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String date = format.format(new Date());
 
@@ -70,7 +72,7 @@ public class ShowReservation extends AppCompatActivity {
 
         //퇴실시간
         TextView finishtime = findViewById(R.id.finishtimeinfo);
-        finishtime.setText(date + "   "+Integer.toString(Integer.parseInt(startTime)+usetime+1)+":00");
+        finishtime.setText(date +"   " + Integer.toString(Integer.parseInt(startTime)+usetime+1)+":00");
 
         Intent intent = new Intent(ShowReservation.this,Timer_QR.class);
         intent.putExtra("status",status);
