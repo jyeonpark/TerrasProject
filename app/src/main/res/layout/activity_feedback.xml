@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.terrasproject.feedback">
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="match_parent"
@@ -57,7 +56,7 @@
                 android:rowCount="3">
 
                 <Button
-                    android:id="@+id/terras4-1"
+                    android:id="@+id/terras41"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -67,7 +66,7 @@
                     android:text="4-1" />
 
                 <Button
-                    android:id="@+id/terras4-2"
+                    android:id="@+id/terras42"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -77,7 +76,7 @@
                     android:text="4-2" />
 
                 <Button
-                    android:id="@+id/terras4-3"
+                    android:id="@+id/terras43"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -87,7 +86,7 @@
                     android:text="4-3" />
 
                 <Button
-                    android:id="@+id/terras3-1"
+                    android:id="@+id/terras31"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -97,7 +96,7 @@
                     android:text="3-1" />
 
                 <Button
-                    android:id="@+id/terras3-2"
+                    android:id="@+id/terras32"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -107,7 +106,7 @@
                     android:text="3-2" />
 
                 <Button
-                    android:id="@+id/terras3-3"
+                    android:id="@+id/terras33"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -117,7 +116,7 @@
                     android:text="3-3" />
 
                 <Button
-                    android:id="@+id/terras2-1"
+                    android:id="@+id/terras21"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -127,7 +126,7 @@
                     android:text="2-1" />
 
                 <Button
-                    android:id="@+id/terras2-2"
+                    android:id="@+id/terras22"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -137,7 +136,7 @@
                     android:text="2-2" />
 
                 <Button
-                    android:id="@+id/terras2-3"
+                    android:id="@+id/terras23"
                     android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="14dp"
@@ -152,7 +151,7 @@
         <EditText
             android:id="@+id/login_password"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             android:layout_marginBottom="50dp"
             android:gravity="top"
             android:hint="신고하는 사유를 입력해주세요."/>
