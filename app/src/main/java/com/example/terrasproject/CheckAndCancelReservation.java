@@ -120,6 +120,10 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         //최종 커밋
         editor.commit();
 
+        Intent intent = new Intent(CheckAndCancelReservation.this, AlarmMain.class);
+        intent.putExtra("activity", "reservationcancel");
+        startActivity(intent);
+
     }
 
 

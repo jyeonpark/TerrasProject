@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.google.zxing.qrcode.encoder.QRCode;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -71,9 +73,12 @@ public class QRcode extends AppCompatActivity {
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
+        /*
         Intent intent_QR_result = new Intent(QRcode.this,Timer_QR.class);
         intent_QR_result.putExtra("result", String.valueOf(result));
         startService(intent_QR_result);
+        */
+
 
 
 
@@ -94,7 +99,12 @@ public class QRcode extends AppCompatActivity {
 
                 if (textViewName.getText().toString().equals(textViewResult.getText().toString())) {
                     Toast.makeText(QRcode.this, "예약완료!", Toast.LENGTH_SHORT).show();
+
                     //타이머 끄기 기능 넣기
+                    Intent intent = new Intent(QRcode.this, AlarmMain.class);
+                    intent.putExtra("activity", "qrcancel");
+                    startActivity(intent);
+
                     ShowReservation.status = 1;
                 }
                 else{

@@ -74,10 +74,11 @@ public class ShowReservation extends AppCompatActivity {
         TextView finishtime = findViewById(R.id.finishtimeinfo);
         finishtime.setText(date +"   " + Integer.toString(Integer.parseInt(startTime)+usetime+1)+":00");
 
+        /*
         Intent intent = new Intent(ShowReservation.this,Timer_QR.class);
         intent.putExtra("status",status);
         startService(intent);
-
+*/
 
 
 
@@ -115,7 +116,7 @@ public class ShowReservation extends AppCompatActivity {
         }
 
         reference = FirebaseDatabase.getInstance().getReference().child("Student");
-        reference.child(LogIn.studentID).child("reservation").setValue("empty");
+        reference.child(LogIn.studentID).child("reservation").setValue("비어있음");
 
         //파일에서 삭제하기
         SharedPreferences.Editor editor = sp.edit();
@@ -129,6 +130,10 @@ public class ShowReservation extends AppCompatActivity {
 
         //최종 커밋
         editor.commit();
+
+        Intent intent = new Intent(ShowReservation.this, AlarmMain.class);
+        intent.putExtra("activity", "reservationcancel");
+        startActivity(intent);
 
     }
 
