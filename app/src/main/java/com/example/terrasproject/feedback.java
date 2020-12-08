@@ -41,9 +41,10 @@ public class feedback extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference,referenceReceiveID;
 
-    Date date = new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("hh");
-    String hour = sdf.format(date);
+   /* Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("hh");*/
+    int hours = 13;
+    String hour = String.valueOf(hours); //sdf.format(date);
 
 
     @Override
@@ -53,6 +54,7 @@ public class feedback extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Feedback");
+
         feedtext = findViewById(R.id.feedtext);
 
         sendID = LogIn.studentID;
@@ -62,23 +64,19 @@ public class feedback extends AppCompatActivity {
 
     public void btnfeedseatClick(View view){
         terras = view.getTag().toString();
+
         System.out.println("button " + terras);
         setContentView(R.layout.activity_feedback);
 
 
-        referenceReceiveID = FirebaseDatabase.getInstance().getReference("Terras");
+        referenceReceiveID = FirebaseDatabase.getInstance().getReference();
         referenceReceiveID.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-
                     try {
-                        System.out.println("receive " + receiveID);
-                        System.out.println("terras " + terras);
-                        System.out.println("hour" + hour);
-                        receiveID = snapshot.child(hour).child("today").child("studentID").getValue(String.class);
-                        System.out.println("receiveID " + receiveID);
+                        receiveID = snapshot.child(terras).child(hour).child("today/studentID").getValue().toString();
                     }catch(NullPointerException e){}
                 }
             }
