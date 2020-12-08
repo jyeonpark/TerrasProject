@@ -74,10 +74,11 @@ public class ShowReservation extends AppCompatActivity {
         TextView finishtime = findViewById(R.id.finishtimeinfo);
         finishtime.setText(date +"   " + Integer.toString(Integer.parseInt(startTime)+usetime+1)+":00");
 
+        /*
         Intent intent = new Intent(ShowReservation.this,Timer_QR.class);
         intent.putExtra("status",status);
         startService(intent);
-
+*/
 
 
 
@@ -131,6 +132,10 @@ public class ShowReservation extends AppCompatActivity {
 
         //최종 커밋
         editor.commit();
+
+        Intent intent = new Intent(ShowReservation.this, AlarmMain.class);
+        intent.putExtra("activity", "reservationcancel");
+        startActivity(intent);
 
     }
 

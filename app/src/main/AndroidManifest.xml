@@ -26,10 +26,16 @@
         <activity android:name=".Reservation" />
         <activity android:name=".ShowReservation" />
 
-        <service android:name=".Timer_QR" />
-        <service android:name=".Timer_Reservation" />
+
+
 
         <activity android:name=".QRcode" />
+        <activity android:name=".AlarmMain" />
+        <receiver android:name=".Alarm" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

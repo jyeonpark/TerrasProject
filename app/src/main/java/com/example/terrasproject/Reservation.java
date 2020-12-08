@@ -1,5 +1,6 @@
 package com.example.terrasproject;
 
+import android.app.AlarmManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,8 +29,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Reservation extends AppCompatActivity {
-    static String terras,seat,state,studentID,startTime,finishTime;
-    static int clickcount=0,usetime,reservation;
+    String terras,seat,state,studentID,startTime,finishTime;
+    int clickcount=0,usetime=0,reservation;
     int flowcheck = 0;
 
     SimpleDateFormat format_hour = new SimpleDateFormat("kk");
@@ -53,7 +54,6 @@ public class Reservation extends AppCompatActivity {
     public void resetSeat(){
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
         int hour = Integer.parseInt(date);
-        showToast("현재시각:"+Integer.toString(hour));
         for(int i=9; i<=hour; i++){
                 Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
                 button.setBackgroundColor(Color.parseColor("#666666"));
@@ -147,6 +147,8 @@ public class Reservation extends AppCompatActivity {
 
 
     public void reservationdialog(View view){
+        showToast(Integer.toString(usetime));
+        studentID = LogIn.studentID;
         if(clickcount!=0) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(Reservation.this);
             dialog.setTitle("사용하실 테라스 상태를 선택해주세요");
@@ -170,13 +172,17 @@ public class Reservation extends AppCompatActivity {
                     clickcount=0;
                     flowcheck=0;
 
+                    Intent intent = new Intent(Reservation.this, AlarmMain.class);
+                    intent.putExtra("activity", "reservation");
+                    startActivity(intent);
 
-                    /* Timer_Reservation 로  데이터 보내기  */
+                    /* Timer_Reservation 로  데이터 보내기
                     Intent intent = new Intent(Reservation.this,Timer_Reservation.class);
                     intent.putExtra("reservation",reservation);
                     startService(intent);
+*/
 
-                    myStartActivity(ShowReservation.class);
+
 
                 }
 

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.reportbutton).setOnClickListener(onClickListener);
         findViewById(R.id.userinformationbutton).setOnClickListener(onClickListener);
         findViewById(R.id.logoutbutton).setOnClickListener(onClickListener);
+        findViewById(R.id.button).setOnClickListener(onClickListener);
 
         TextView textView = findViewById(R.id.maintext);
         textView.setText(""+ LogIn.studentID+ "님 반갑습니다");
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.logoutbutton:
                         logout();
+                        break;
+
+                    case R.id.button:
+                        Intent intent = new Intent(MainActivity.this, AlarmMain.class);
+                        intent.putExtra("activity", "qrcancel");
+                        startActivity(intent);
                         break;
                 }
             }
