@@ -23,6 +23,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,24 +46,36 @@ public class feedback extends AppCompatActivity {
         reference = database.getReference("Feedback");
 
         feedtext = findViewById(R.id.feedtext);
+        receiveID = "12345";
     }
 
     public void btnfeedseatClick(View view){
         terras = view.getTag().toString();
-        //view.setBackgroundColor(Color.parseColor("#666666"));
+        view.setBackgroundColor(Color.parseColor("#666666"));
         setContentView(R.layout.activity_feedback);
     }
 
+
     public void btnsendfeedClick(View view){
         feedtext.setText(feedtext.getText().toString());
-
         makeNewFeed();
-        setContentView(R.layout.activity_main);
     }
 
     void makeNewFeed(){
-        reference.child(receiveID).child("SendID").setValue("empty");
-        reference.child(receiveID).child("Terras").setValue(terras);
+        reference.child(receiveID).child("Terras").push().setValue(terras);
+        reference.child(receiveID).child("Feedtext").push().setValue(feedtext);
+        showToast("신고완료");
+        myStartActivity(MainActivity.class);
+    }
+
+    private void myStartActivity(Class c) {
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    private void showToast(String msg) {
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 }
 
