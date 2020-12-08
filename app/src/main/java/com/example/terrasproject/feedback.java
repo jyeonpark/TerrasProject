@@ -31,12 +31,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class feedback extends AppCompatActivity {
     EditText feedtext;
     static String terras, sendID, receiveID, text;
 
     FirebaseDatabase database;
-    DatabaseReference reference;
+    DatabaseReference reference,referenceReceiveID;
+
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("hh");
+    String hour = sdf.format(date);
+
+    String hours = String.valueOf(hour);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +54,45 @@ public class feedback extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Feedback");
-
-
-
         feedtext = findViewById(R.id.feedtext);
 
         sendID = LogIn.studentID;
 
-        receiveID = "1234567";
 
     }
 
     public void btnfeedseatClick(View view){
         terras = view.getTag().toString();
+        System.out.println("button " + terras);
         setContentView(R.layout.activity_feedback);
+
+
+        referenceReceiveID = FirebaseDatabase.getInstance().getReference().child("Terras");
+        referenceReceiveID.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+
+                    try {
+                        System.out.println("receive " + receiveID);
+                        System.out.println("terras " + terras);
+                        System.out.println("hour" + hours);
+                        receiveID = snapshot.child(terras).child(hours).child("today").child("studentID").toString();
+                        System.out.println("receiveID " + receiveID);
+                    }catch(NullPointerException e){}
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
 
     }
 
@@ -73,6 +107,7 @@ public class feedback extends AppCompatActivity {
         reference.child(receiveID).child("Terras").setValue(terras);
         reference.child(receiveID).child("Feedtext").setValue(text);
         reference.child(receiveID).child("SendID").setValue(sendID);
+
 
         showToast("신고완료");
         myStartActivity(MainActivity.class);
