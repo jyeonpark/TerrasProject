@@ -147,7 +147,7 @@ public class Reservation extends AppCompatActivity {
 
 
     public void reservationdialog(View view){
-        showToast(Integer.toString(usetime));
+
         studentID = LogIn.studentID;
         if(clickcount!=0) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(Reservation.this);

@@ -26,9 +26,6 @@
         <activity android:name=".Reservation" />
         <activity android:name=".ShowReservation" />
 
-
-
-
         <activity android:name=".QRcode" />
         <activity android:name=".AlarmMain" />
         <receiver android:name=".Alarm" >
