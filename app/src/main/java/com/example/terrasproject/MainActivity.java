@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     if(snapshot.getKey().equals(LogIn.studentID)){
                         //등록된 학번으로 예약이 없을 때
-                        if(snapshot.child("reservation").getValue().equals("empty"))
+                        if(snapshot.child("reservation").getValue().equals("비어있음"))
                             check = 0;
                         //예약이 있을 때
                         else

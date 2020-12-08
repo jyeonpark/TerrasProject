@@ -118,7 +118,7 @@ public class ShowReservation extends AppCompatActivity {
         }
 
         reference = FirebaseDatabase.getInstance().getReference().child("Student");
-        reference.child(LogIn.studentID).child("reservation").setValue("empty");
+        reference.child(LogIn.studentID).child("reservation").setValue("비어있음");
 
         //파일에서 삭제하기
         SharedPreferences.Editor editor = sp.edit();

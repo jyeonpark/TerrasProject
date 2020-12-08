@@ -38,7 +38,7 @@ public class Alarm extends BroadcastReceiver {
             }
 
             reference = FirebaseDatabase.getInstance().getReference().child("Student");
-            reference.child(studentID).child("reservation").setValue("empty");
+            reference.child(studentID).child("reservation").setValue("비어있음");
 
             //파일에서 삭제하기
             SharedPreferences.Editor editor = sp.edit();
