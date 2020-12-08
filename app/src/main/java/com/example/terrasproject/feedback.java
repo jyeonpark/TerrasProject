@@ -41,10 +41,9 @@ public class feedback extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference reference,referenceReceiveID;
 
-   /* Date date = new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("hh");*/
-    int hours = 13;
-    String hour = String.valueOf(hours); //sdf.format(date);
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("hh");
+    String hour = String.valueOf(date); //sdf.format(date);
 
 
     @Override
