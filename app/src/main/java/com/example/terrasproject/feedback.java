@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -32,7 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class feedback extends AppCompatActivity {
     EditText feedtext;
-    static String terras, sendID, receiveID;
+    static String terras, sendID, receiveID, text;
 
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -45,25 +46,34 @@ public class feedback extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Feedback");
 
+
+
         feedtext = findViewById(R.id.feedtext);
-        receiveID = "12345";
+
+        sendID = LogIn.studentID;
+
+        receiveID = "1234567";
+
     }
 
     public void btnfeedseatClick(View view){
         terras = view.getTag().toString();
-        view.setBackgroundColor(Color.parseColor("#666666"));
         setContentView(R.layout.activity_feedback);
+
     }
 
 
-    public void btnsendfeedClick(View view){
-        feedtext.setText(feedtext.getText().toString());
+    public void btnsendClick(View view){
         makeNewFeed();
     }
 
     void makeNewFeed(){
-        reference.child(receiveID).child("Terras").push().setValue(terras);
-        reference.child(receiveID).child("Feedtext").push().setValue(feedtext);
+
+        reference.child(receiveID).child("receiveID").setValue(receiveID);
+        reference.child(receiveID).child("Terras").setValue(terras);
+        reference.child(receiveID).child("Feedtext").setValue(text);
+        reference.child(receiveID).child("SendID").setValue(sendID);
+
         showToast("신고완료");
         myStartActivity(MainActivity.class);
     }
