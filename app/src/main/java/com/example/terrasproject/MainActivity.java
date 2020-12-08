@@ -102,6 +102,9 @@ public class MainActivity extends AppCompatActivity {
                 else if(v.getId() == R.id.logoutbutton){
                     logout();
                 }
+                else if(v.getId() == R.id.userinformationbutton){
+                    myStartActivity(UserInfo.class);
+                }
                 else{
                     showToast("예약이 필요한 항목입니다.");
                 }
