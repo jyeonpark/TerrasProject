@@ -45,7 +45,6 @@ public class feedback extends AppCompatActivity {
     SimpleDateFormat sdf = new SimpleDateFormat("hh");
     String hour = sdf.format(date);
 
-    String hours = String.valueOf(hour);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,7 @@ public class feedback extends AppCompatActivity {
         setContentView(R.layout.activity_feedback);
 
 
-        referenceReceiveID = FirebaseDatabase.getInstance().getReference().child("Terras");
+        referenceReceiveID = FirebaseDatabase.getInstance().getReference("Terras");
         referenceReceiveID.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -77,8 +76,8 @@ public class feedback extends AppCompatActivity {
                     try {
                         System.out.println("receive " + receiveID);
                         System.out.println("terras " + terras);
-                        System.out.println("hour" + hours);
-                        receiveID = snapshot.child(terras).child(hours).child("today").child("studentID").toString();
+                        System.out.println("hour" + hour);
+                        receiveID = snapshot.child(hour).child("today").child("studentID").getValue(String.class);
                         System.out.println("receiveID " + receiveID);
                     }catch(NullPointerException e){}
                 }
