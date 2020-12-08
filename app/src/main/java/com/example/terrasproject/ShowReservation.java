@@ -88,8 +88,6 @@ public class ShowReservation extends AppCompatActivity {
     public void btncompletereservation(View view) {
         myStartActivity(QRcode.class);
 
-
-
     }
 
     //배정취소
