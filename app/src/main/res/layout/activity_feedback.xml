@@ -25,136 +25,15 @@
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="50dp"
-            android:background="#000">
 
-            <TextView
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                android:layout_margin="1dp"
-                android:background="#FFF"
-                android:gravity="center"
-                android:text="엘
-            리
-            베
-            이
-            터"
-                android:textColor="#000000"></TextView>
-
-            <GridLayout
-                android:layout_width="377dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginBottom="1dp"
-                android:background="#DFE0E1"
-                android:columnCount="3"
-                android:rowCount="3">
-
-                <Button
-                    android:id="@+id/terras41"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras4-1"
-                    android:text="4-1" />
-
-                <Button
-                    android:id="@+id/terras42"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras4-2"
-                    android:text="4-2" />
-
-                <Button
-                    android:id="@+id/terras43"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras4-3"
-                    android:text="4-3" />
-
-                <Button
-                    android:id="@+id/terras31"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras3-1"
-                    android:text="3-1" />
-
-                <Button
-                    android:id="@+id/terras32"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras3-2"
-                    android:text="3-2" />
-
-                <Button
-                    android:id="@+id/terras33"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras3-3"
-                    android:text="3-3" />
-
-                <Button
-                    android:id="@+id/terras21"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras2-1"
-                    android:text="2-1" />
-
-                <Button
-                    android:id="@+id/terras22"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras2-2"
-                    android:text="2-2" />
-
-                <Button
-                    android:id="@+id/terras23"
-                    android:layout_width="95dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="14dp"
-                    android:background="#FFF"
-                    android:padding="15dp"
-                    android:tag="terras2-3"
-                    android:text="2-3" />
-
-            </GridLayout>
-        </LinearLayout>
 
         <EditText
-            android:id="@+id/login_password"
+            android:id="@+id/feedtext"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="400dp"
             android:layout_marginBottom="50dp"
-            android:gravity="top"
-            android:hint="신고하는 사유를 입력해주세요."/>
+            android:hint="신고하는 사유를 입력해주세요."
+            android:layout_gravity="top"/>
 
         <Button
             android:id="@+id/sendButton"
@@ -163,6 +42,7 @@
             android:layout_margin="15dp"
             android:background="@drawable/shape"
             android:text="제출하기"
+            android:onClick="btnsendfeedClick"
             android:textColor="#FFF"
             android:textSize="14sp"
             android:textStyle="bold" />

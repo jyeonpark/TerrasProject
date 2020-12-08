@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     myStartActivity(Reservation.class);
                 }
                 else if(v.getId() == R.id.reportbutton){
-                    //신고하기
+                    myStartActivity(feedback.class);
                 }
                 else if(v.getId() == R.id.logoutbutton){
                     logout();
