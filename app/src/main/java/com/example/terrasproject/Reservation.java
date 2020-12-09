@@ -204,7 +204,6 @@ public class Reservation extends AppCompatActivity {
        studentID = LogIn.studentID;
 
         //한시간짜리 예약
-        //empty에서 사용중으로 바꿈
         if(usetime==0){
             reference.child(startTime).child("today").child("seat").setValue(seat);
             reference.child(startTime).child("today").child("state").setValue(state);
