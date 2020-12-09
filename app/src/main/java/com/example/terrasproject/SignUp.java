@@ -82,7 +82,7 @@ public class  SignUp extends AppCompatActivity {
     void makeNewID(){
         reference.child(student.getStudentID()).setValue(student);
         reference.child(student.getStudentID()).child("reservation").setValue("empty");
-        reference.child(student.getStudentID()).child("feedback").setValue("0");
+        reference.child(student.getStudentID()).child("feedback").setValue(0);
         showToast("회원가입완료");
         myStartActivity(LogIn.class);
     }

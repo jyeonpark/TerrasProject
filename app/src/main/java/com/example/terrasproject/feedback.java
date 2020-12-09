@@ -29,6 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
@@ -39,9 +40,10 @@ public class feedback extends AppCompatActivity {
     private feedbackText feedbackText;
 
     FirebaseDatabase database;
-    DatabaseReference reference,referenceReceiveID;
+    DatabaseReference reference, referenceReceiveID, addfeedreference;
 
-    Date date = new Date();
+    long now = System.currentTimeMillis();
+    Date date = new Date(now);
     SimpleDateFormat sdf = new SimpleDateFormat("h");
     String hour = sdf.format(date);
 
@@ -52,14 +54,10 @@ public class feedback extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setseat);
-
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Feedback").push();
-
-
+        addfeedreference = database.getReference("Student");
         sendID = LogIn.studentID;
-
-
     }
 
     public void btnfeedseatClick(View view){
@@ -68,68 +66,49 @@ public class feedback extends AppCompatActivity {
         System.out.println("button " + terras);
         setContentView(R.layout.activity_feedback);
 
-
-        referenceReceiveID = FirebaseDatabase.getInstance().getReference();
-        referenceReceiveID.addListenerForSingleValueEvent(new ValueEventListener() {
+        referenceReceiveID = database.getReference("Student");
+        referenceReceiveID.orderByChild("reservation").equalTo(terras).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        System.out.println("test"+snapshot.child(terras).child(hour).child("today/studentID").toString());
-                        receiveID = snapshot.child(terras).child(hour).child("today/studentID").toString();
-                        System.out.println("receive" + receiveID);
+                        receiveID = snapshot.getKey();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
-
-
-
-
     }
 
     public void btnsendClick(View view){
-
-
-        try {
-
-
-           EditText feedtext = (EditText) findViewById(R.id.feedtext);
-
-           feedbackText = new feedbackText();
-
-           feedbackText.setFeedback(feedtext.getText().toString());
-
-        }       catch(NullPointerException e ){}
-
             makeNewFeed();
-
-
-
-
-
-
-
     }
 
     void makeNewFeed(){
+        try {
+            EditText feedtext = (EditText) findViewById(R.id.feedtext);
+            feedbackText = new feedbackText();
+            feedbackText.setFeedback(feedtext.getText().toString());
+        }
+        catch(NullPointerException e ){}
 
             System.out.println(feedbackText.getFeedback());
             System.out.println(receiveID);
             System.out.println(terras);
             System.out.println(sendID);
-            reference.child(receiveID).child("receiveID").setValue(receiveID);
-            reference.child(receiveID).child("Terras").setValue(terras);
-            reference.child(receiveID).child("Feedtext").setValue(feedbackText.getFeedback());
-            reference.child(receiveID).child("SendID").setValue(sendID);
+            reference.child("receiveID").setValue(receiveID);
+            reference.child("Terras").setValue(terras);
+            reference.child("Feedtext").setValue(feedbackText.getFeedback());
+            reference.child("SendID").setValue(sendID);
+
+            addfeed();
 
         showToast("신고완료");
         myStartActivity(MainActivity.class);
+    }
+
+    public void addfeed(){
+        addfeedreference.child(receiveID).child("feedback").setValue(+1);
     }
 
     private void myStartActivity(Class c) {
