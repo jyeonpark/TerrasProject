@@ -35,15 +35,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class feedback extends AppCompatActivity {
-    EditText feedtext;
-    static String terras, sendID, receiveID, text;
+    static String terras, sendID, receiveID;
+    private feedbackText feedbackText;
 
     FirebaseDatabase database;
     DatabaseReference reference,referenceReceiveID;
 
     Date date = new Date();
-    SimpleDateFormat sdf = new SimpleDateFormat("hh");
-    String hour = String.valueOf(date); //sdf.format(date);
+    SimpleDateFormat sdf = new SimpleDateFormat("h");
+    String hour = sdf.format(date);
+
+
 
 
     @Override
@@ -52,9 +54,8 @@ public class feedback extends AppCompatActivity {
         setContentView(R.layout.setseat);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Feedback");
+        reference = database.getReference("Feedback").push();
 
-        feedtext = findViewById(R.id.feedtext);
 
         sendID = LogIn.studentID;
 
@@ -74,9 +75,9 @@ public class feedback extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    try {
-                        receiveID = snapshot.child(terras).child(hour).child("today/studentID").getValue().toString();
-                    }catch(NullPointerException e){}
+                        System.out.println("test"+snapshot.child(terras).child(hour).child("today/studentID").toString());
+                        receiveID = snapshot.child(terras).child(hour).child("today/studentID").toString();
+                        System.out.println("receive" + receiveID);
                 }
             }
 
@@ -92,18 +93,40 @@ public class feedback extends AppCompatActivity {
 
     }
 
-
     public void btnsendClick(View view){
-        makeNewFeed();
+
+
+        try {
+
+
+           EditText feedtext = (EditText) findViewById(R.id.feedtext);
+
+           feedbackText = new feedbackText();
+
+           feedbackText.setFeedback(feedtext.getText().toString());
+
+        }       catch(NullPointerException e ){}
+
+            makeNewFeed();
+
+
+
+
+
+
+
     }
 
     void makeNewFeed(){
 
-        reference.child(receiveID).child("receiveID").setValue(receiveID);
-        reference.child(receiveID).child("Terras").setValue(terras);
-        reference.child(receiveID).child("Feedtext").setValue(text);
-        reference.child(receiveID).child("SendID").setValue(sendID);
-
+            System.out.println(feedbackText.getFeedback());
+            System.out.println(receiveID);
+            System.out.println(terras);
+            System.out.println(sendID);
+            reference.child(receiveID).child("receiveID").setValue(receiveID);
+            reference.child(receiveID).child("Terras").setValue(terras);
+            reference.child(receiveID).child("Feedtext").setValue(feedbackText.getFeedback());
+            reference.child(receiveID).child("SendID").setValue(sendID);
 
         showToast("신고완료");
         myStartActivity(MainActivity.class);
