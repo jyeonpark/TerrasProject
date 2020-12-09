@@ -25,10 +25,10 @@
         </activity>
         <activity android:name=".Reservation" />
         <activity android:name=".ShowReservation" />
-
         <activity android:name=".QRcode" />
         <activity android:name=".AlarmMain" />
-        <receiver android:name=".Alarm" >
+
+        <receiver android:name=".Alarm">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

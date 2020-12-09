@@ -3,13 +3,21 @@ package com.example.terrasproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,11 +26,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
-    int check;
+    int check,click=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SimpleDateFormat format_hour = new SimpleDateFormat("kk");
+        String date = format_hour.format(new Date());
 
         //앱이 종료되기 전의 데이터를 불러옴
         SharedPreferences sf = getSharedPreferences("file", MODE_PRIVATE);
@@ -50,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(""+ LogIn.studentID+ "님 반갑습니다");
         textView.setTextSize(20);
 
+        final RelativeLayout timelinearLayout = findViewById(R.id.parentlayout);
+        int hour = Integer.parseInt(date);
+        //시간 체크
+        for (int i = 9; i < hour; i++) {
+            Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
+            button.setBackgroundColor(Color.parseColor("#666666"));
+            button.setTextColor(Color.parseColor("#FFFFFF"));
+            button.setEnabled(false);
+        }
     }
 
 
@@ -147,6 +166,55 @@ public class MainActivity extends AppCompatActivity {
 
         myStartActivity(LogIn.class);
 
+    }
+
+    public void showseat(View view) {
+        final Button v = (Button) view;
+        click++;
+        final RelativeLayout timelinearLayout = findViewById(R.id.parentlayout);
+
+        if (click == 1) {
+            for (int i = 2; i <= 4; i++) {
+                for (int j = 1; j <= 3; j++) {
+                    final String terras = "terras" + Integer.toString(i) + "-" + Integer.toString(j);
+                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
+                    reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                if (snapshot.getKey().equals(v.getTag().toString())) {
+                                    if(!(snapshot.child("today").child("seat").getValue().toString().equals("empty"))){
+                                        String state = snapshot.child("today").child("state").getValue().toString();
+                                        TextView textView = timelinearLayout.findViewWithTag(terras);
+                                        textView.setText(textView.getText().toString() + "\n" +state);
+                                        textView.setBackgroundColor(Color.parseColor("#4EBEF1"));
+                                        findViewById(R.id.showterras).setVisibility(View.VISIBLE);
+                                    }
+
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            }
+        }
+        for (int i = 2; i <= 4; i++) {
+            for (int j = 1; j <= 3; j++) {
+                final String terras = "terras" + Integer.toString(i) + "-" + Integer.toString(j);
+                final String text = Integer.toString(i) + "-" + Integer.toString(j);
+                TextView textView = timelinearLayout.findViewWithTag(terras);
+                textView.setText(text);
+                textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
+        }
+        click=0;
     }
 
     private long time = 0;

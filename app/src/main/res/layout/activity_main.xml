@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -21,7 +22,7 @@
         android:id="@+id/tablelayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:background="#50515A"
@@ -60,7 +61,7 @@
 
     <TableLayout
         android:id="@+id/tablelayout2"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tablelayout"
@@ -103,7 +104,7 @@ android:layout_margin="2dp"
             android:textStyle="bold" />
     </TableRow>
     </TableLayout>
-
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -112,13 +113,12 @@ android:layout_margin="2dp"
         android:background="#000">
 
 
-
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="#DFE0E1"
+            android:layout_height="match_parent"
             android:layout_marginBottom="1dp"
+            android:background="#DFE0E1"
+            android:gravity="center_vertical"
             android:text="\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t&lt;테라스 이용 안내&gt;\n\n
         *이용시간은 9:00 ~ 10:00 까지 입니다. \n
         *지정된 시간에만 사용해 주세요.\n
@@ -130,19 +130,312 @@ android:layout_margin="2dp"
         </TextView>
 
     </LinearLayout>
-<LinearLayout
+    -->
+
+    <HorizontalScrollView
+        android:layout_below="@id/tablelayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DFE0E1"
+        android:id="@+id/scrollview">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="9"
+                android:text="9:00~10:00"
+                />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="10"
+                android:text="10:00~11:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="11"
+                android:text="11:00~12:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="12"
+                android:text="12:00~13:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="13"
+                android:text="13:00~14:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="14"
+                android:text="14:00~15:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="15"
+                android:text="15:00~16:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="16"
+                android:text="16:00~17:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="17"
+                android:text="17:00~18:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="18"
+                android:text="18:00~19:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="19"
+                android:text="19:00~20:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="20"
+                android:text="20:00~21:00" />
+
+            <Button
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:layout_margin="3dp"
+                android:background="#FFFFFF"
+                android:onClick="showseat"
+                android:tag="21"
+                android:text="21:00~22:00" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_below="@+id/scrollview"
+        android:id="@+id/showterras"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:background="#000"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:background="#FFF"
+            android:gravity="center"
+            android:text="엘
+            리
+            베
+            이
+            터"
+            android:textColor="#000000"></TextView>
+
+        <GridLayout
+            android:layout_width="377dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="#DFE0E1"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <TextView
+                android:id="@+id/terras4-1"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras4-1"
+                android:gravity="center"
+                android:text="4-1" />
+
+            <TextView
+                android:id="@+id/terras4-2"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras4-2"
+                android:gravity="center"
+                android:text="4-2" />
+
+            <TextView
+                android:id="@+id/terras4-3"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras4-3"
+                android:gravity="center"
+                android:text="4-3" />
+
+            <TextView
+                android:id="@+id/terras3-1"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras3-1"
+                android:text="3-1"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/terras3-2"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras3-2"
+                android:text="3-2"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/terras3-3"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras3-3"
+                android:text="3-3"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/terras2-1"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras2-1"
+                android:text="2-1"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/terras2-2"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras2-2"
+                android:text="2-2"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/terras2-3"
+                android:layout_width="92dp"
+                android:layout_height="80dp"
+                android:layout_margin="12dp"
+                android:background="#FFF"
+                android:onClick="btnSeatClick"
+                android:padding="15dp"
+                android:tag="terras2-3"
+                android:text="2-3"
+                android:gravity="center"/>
+
+        </GridLayout>
+    </LinearLayout>
+
+    <TableRow
+    android:id="@+id/linearlayout2"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/linearlayout"
     android:orientation="horizontal"
-    android:layout_margin="20dp">
+    android:layout_alignParentBottom="true"
+    android:layout_centerInParent="true">
 
     <Button
         android:id="@+id/reportbutton"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_margin="15dp"
         android:background="@drawable/shape4"
         android:text="신고하기"
         android:textColor="#000"
@@ -154,7 +447,7 @@ android:layout_margin="2dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_margin="14dp"
+        android:layout_margin="15dp"
         android:background="@drawable/shape4"
         android:text="회원정보"
         android:textColor="#000"
@@ -165,13 +458,13 @@ android:layout_margin="2dp"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
+        android:layout_margin="15dp"
         android:background="@drawable/shape4"
         android:text="로그아웃"
         android:textColor="#000"
         android:textStyle="normal" />
 
-    </LinearLayout>
-
+    </TableRow>
 
 </RelativeLayout>
+
