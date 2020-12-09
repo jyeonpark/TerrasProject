@@ -176,11 +176,6 @@ public class Reservation extends AppCompatActivity {
                     intent.putExtra("activity", "reservation");
                     startActivity(intent);
 
-                    /* Timer_Reservation 로  데이터 보내기
-                    Intent intent = new Intent(Reservation.this,Timer_Reservation.class);
-                    intent.putExtra("reservation",reservation);
-                    startService(intent);
-*/
 
 
 

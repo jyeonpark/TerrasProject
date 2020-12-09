@@ -42,7 +42,7 @@
             android:layout_margin="15dp"
             android:background="@drawable/shape"
             android:text="제출하기"
-            android:onClick="btnsendfeedClick"
+            android:onClick="btnsendClick"
             android:textColor="#FFF"
             android:textSize="14sp"
             android:textStyle="bold" />

@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -30,12 +31,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class feedback extends AppCompatActivity {
-    EditText feedtext;
     static String terras, sendID, receiveID;
+    private feedbackText feedbackText;
 
     FirebaseDatabase database;
-    DatabaseReference reference;
+    DatabaseReference reference,referenceReceiveID;
+
+    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("h");
+    String hour = sdf.format(date);
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +54,80 @@ public class feedback extends AppCompatActivity {
         setContentView(R.layout.setseat);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Feedback");
+        reference = database.getReference("Feedback").push();
 
-        feedtext = findViewById(R.id.feedtext);
-        receiveID = "12345";
+
+        sendID = LogIn.studentID;
+
+
     }
 
     public void btnfeedseatClick(View view){
         terras = view.getTag().toString();
-        view.setBackgroundColor(Color.parseColor("#666666"));
+
+        System.out.println("button " + terras);
         setContentView(R.layout.activity_feedback);
+
+
+        referenceReceiveID = FirebaseDatabase.getInstance().getReference();
+        referenceReceiveID.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        System.out.println("test"+snapshot.child(terras).child(hour).child("today/studentID").toString());
+                        receiveID = snapshot.child(terras).child(hour).child("today/studentID").toString();
+                        System.out.println("receive" + receiveID);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
     }
 
+    public void btnsendClick(View view){
 
-    public void btnsendfeedClick(View view){
-        feedtext.setText(feedtext.getText().toString());
-        makeNewFeed();
+
+        try {
+
+
+           EditText feedtext = (EditText) findViewById(R.id.feedtext);
+
+           feedbackText = new feedbackText();
+
+           feedbackText.setFeedback(feedtext.getText().toString());
+
+        }       catch(NullPointerException e ){}
+
+            makeNewFeed();
+
+
+
+
+
+
+
     }
 
     void makeNewFeed(){
-        reference.child(receiveID).child("Terras").push().setValue(terras);
-        reference.child(receiveID).child("Feedtext").push().setValue(feedtext);
+
+            System.out.println(feedbackText.getFeedback());
+            System.out.println(receiveID);
+            System.out.println(terras);
+            System.out.println(sendID);
+            reference.child(receiveID).child("receiveID").setValue(receiveID);
+            reference.child(receiveID).child("Terras").setValue(terras);
+            reference.child(receiveID).child("Feedtext").setValue(feedbackText.getFeedback());
+            reference.child(receiveID).child("SendID").setValue(sendID);
+
         showToast("신고완료");
         myStartActivity(MainActivity.class);
     }
