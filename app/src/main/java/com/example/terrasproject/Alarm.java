@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,6 +30,7 @@ public class Alarm extends BroadcastReceiver {
             usetime = sp.getInt("usetime"+ studentID,0);
 
             //DB에서 정보없애기
+
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Terras").child(terras);
             for (int i = 0; i <= usetime; i++) {
                 String reservationctime = Integer.toString(Integer.parseInt(startTime) + i);
