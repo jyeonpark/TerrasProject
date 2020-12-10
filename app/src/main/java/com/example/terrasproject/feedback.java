@@ -40,7 +40,7 @@ public class feedback extends AppCompatActivity {
     private feedbackText feedbackText;
 
     FirebaseDatabase database;
-    DatabaseReference reference, referenceReceiveID, addfeedreference;
+    DatabaseReference reference, referenceReceiveID, addfeedreference, feedreference;
 
     long now = System.currentTimeMillis();
     Date date = new Date(now);
@@ -109,17 +109,19 @@ public class feedback extends AppCompatActivity {
 
     public void addfeed(){
 
-        DatabaseReference feedreference = FirebaseDatabase.getInstance().getReference().child("Student").child(receiveID).child("feedback");
+        feedreference = FirebaseDatabase.getInstance().getReference().child("Student").child(receiveID);
         feedreference.addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    feednum=snapshot.getValue().toString();
-                    int numfeed =  Integer.parseInt(feednum);
-                    numfeed = numfeed+1;
-                    //feednum = Integer.toString(numfeed);
-                    addfeedreference.child(receiveID).child("feedback").setValue(numfeed);
+                    if(snapshot.getKey().equals("feedback")) {
+                        feednum = snapshot.getValue().toString();
+                        int numfeed = Integer.parseInt(feednum);
+                        numfeed = numfeed + 1;
+                        feednum = Integer.toString(numfeed);
+                        feedreference.child("feedback").setValue(feednum);
+                    }
                 }
             }
             @Override
