@@ -55,6 +55,7 @@ public class AlarmMain extends AppCompatActivity {
         //예약에 대한 알람
         Intent intent = new Intent(this, Alarm.class);
         intent.putExtra("studentID", studentID);
+        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         PendingIntent pIntent = PendingIntent.getBroadcast(this, Integer.parseInt(studentID), intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //qr에 대한 알람, studentID에 100을 곱한값으로 아이디 부여
@@ -81,10 +82,10 @@ public class AlarmMain extends AppCompatActivity {
         qrcalendar.set(Calendar.SECOND, 0);
         qrcalendar.set(Calendar.MILLISECOND, 0);
 
-        AM.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);//예약알람
-        AM.set(AlarmManager.RTC_WAKEUP, qrcalendar.getTimeInMillis(), pIntent2);//qr알람
 
-        showToast(Integer.toString(qrhour)+" : "+ Integer.toString(qrminute));
+
+        AM.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);//예약알람
+       AM.set(AlarmManager.RTC_WAKEUP, qrcalendar.getTimeInMillis(), pIntent2);//qr알람
 
 
     }
