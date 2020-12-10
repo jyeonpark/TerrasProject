@@ -41,8 +41,6 @@ public class CheckAndCancelReservation extends AppCompatActivity {
         startTime = sp.getString("startTime"+LogIn.studentID,"");
         usetime = sp.getInt("usetime"+LogIn.studentID,0);
 
-        showToast("startTime"+startTime);
-        showToast("usetime:"+Integer.toString(usetime));
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Student");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
