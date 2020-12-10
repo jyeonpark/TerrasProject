@@ -36,7 +36,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class feedback extends AppCompatActivity {
-    static String terras, sendID, receiveID;
+    static String terras, sendID, receiveID, feednum;
     private feedbackText feedbackText;
 
     FirebaseDatabase database;
@@ -108,8 +108,27 @@ public class feedback extends AppCompatActivity {
     }
 
     public void addfeed(){
-        addfeedreference.child(receiveID).child("feedback").setValue(+1);
+
+        DatabaseReference feedreference = FirebaseDatabase.getInstance().getReference().child("Student").child(receiveID);
+        feedreference.addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    feednum = snapshot.getValue().toString();
+                    int numfeed =  Integer.parseInt(feednum);
+                    numfeed = numfeed+1;
+                    feednum = Integer.toString(numfeed);
+                    addfeedreference.child(receiveID).child("feedback").setValue(feednum);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
+
 
     private void myStartActivity(Class c) {
         Intent intent = new Intent(this, c);
