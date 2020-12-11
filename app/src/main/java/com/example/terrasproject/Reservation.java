@@ -54,7 +54,7 @@ public class Reservation extends AppCompatActivity {
     public void resetSeat(){
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
         int hour = Integer.parseInt(date);
-        for(int i=9; i<hour; i++){
+        for(int i=9; i<=hour; i++){
                 Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
                 button.setBackgroundColor(Color.parseColor("#666666"));
                 button.setTextColor(Color.parseColor("#FFFFFF"));
@@ -88,6 +88,7 @@ public class Reservation extends AppCompatActivity {
         Button view = (Button) v;
         if(view == findViewById(R.id.btnreset)){
                 clickcount=0;
+                usetime=0;
                 for (int i = 9; i <= 21; i++) {
                     String middletime = Integer.toString(i);
                     Button button = timelinearLayout.findViewWithTag(middletime);
@@ -116,7 +117,9 @@ public class Reservation extends AppCompatActivity {
                     if(!timelinearLayout.findViewWithTag(middletime).isEnabled()) {
                         showToast("연속된 시간만 예약할 수 있습니다.");
                         clickcount=0;
-                        timelinearLayout.findViewWithTag(startTime).setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        Button button = timelinearLayout.findViewWithTag(startTime);
+                        button.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        button.setTextColor(Color.parseColor("#000000"));
                         flowcheck++;
                         break allLoop;
                     }

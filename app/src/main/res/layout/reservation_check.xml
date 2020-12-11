@@ -188,7 +188,7 @@
             <Button
                 android:id="@+id/btncompletereservation"
                 android:layout_width="150dp"
-                android:layout_margin="15dp"
+                android:layout_margin="8dp"
                 android:layout_height="wrap_content"
                 android:text="배정 확정"
                 android:background="@drawable/shape"
@@ -198,7 +198,7 @@
                 android:id="@+id/btncancelreservation"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_margin="8dp"
                 android:text="좌석 취소"
                 android:background="@drawable/shape2"
                 android:onClick="btncancelreservation">
