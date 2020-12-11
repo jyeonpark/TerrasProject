@@ -30,8 +30,6 @@ public class AlarmMain extends AppCompatActivity {
         activity = getIntent().getStringExtra("activity");
         studentID = LogIn.studentID;
 
-        Toast.makeText(this,activity,Toast.LENGTH_SHORT).show();
-
         SharedPreferences sp = getSharedPreferences("file",MODE_PRIVATE);
         //앱이 종료되기 전의 데이터를 불러옴
 
@@ -82,11 +80,17 @@ public class AlarmMain extends AppCompatActivity {
         qrcalendar.set(Calendar.SECOND, 0);
         qrcalendar.set(Calendar.MILLISECOND, 0);
 
+        Calendar q = Calendar.getInstance();
+        q.set(Calendar.HOUR_OF_DAY,qrhour);
+        q.set(Calendar.MINUTE,qrminute);
+        q.set(Calendar.SECOND, 0);
+        q.set(Calendar.MILLISECOND, 0);
+
+        showToast(qrhour +":"+qrminute);
 
 
         AM.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);//예약알람
-       AM.set(AlarmManager.RTC_WAKEUP, qrcalendar.getTimeInMillis(), pIntent2);//qr알람
-
+        AM.set(AlarmManager.RTC_WAKEUP, q.getTimeInMillis(), pIntent2);//qr알람
 
     }
 
