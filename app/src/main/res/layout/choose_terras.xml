@@ -149,4 +149,23 @@
         </GridLayout>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="1dp"
+        android:background="@drawable/shape4"
+        android:gravity="center_vertical"
+        android:text="\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t&lt;테라스 이용 안내&gt;\n\n
+    *이용시간은 9:00 ~ 10:00 까지 입니다. \n
+    *지정된 시간에만 사용해 주세요.\n
+    *예약한 시간부터 15분이내에 QR코드를 인증해주세요.\n
+    *QR코드를 인증하지 않을 시 예약이 자동 취소됩니다.\n
+    *이용하실 용도에 따라 &lt;소음/조용&lt; 을 선택해주세요.\n\n
+    *이용하실 용도에 따라 &lt;소음/조용&gt; 을 선택해주세요.\n\n
+    "
+        android:textStyle="bold">
+
+    </TextView>
+
 </LinearLayout>
