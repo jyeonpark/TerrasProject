@@ -54,7 +54,7 @@ public class Reservation extends AppCompatActivity {
     public void resetSeat(){
         final LinearLayout timelinearLayout = findViewById(R.id.parentview);
         int hour = Integer.parseInt(date);
-        for(int i=9; i<=hour; i++){
+        for(int i=9; i<hour; i++){
                 Button button = timelinearLayout.findViewWithTag(Integer.toString(i));
                 button.setBackgroundColor(Color.parseColor("#666666"));
                 button.setTextColor(Color.parseColor("#FFFFFF"));
@@ -127,7 +127,7 @@ public class Reservation extends AppCompatActivity {
 
                         if (clickcount==2 && flowcheck == 0) {
                             if (usetime > 0) {
-                                if (usetime <= 5) {
+                                if (usetime < 5) {
                                     for (int i = 1; i <= usetime; i++) {
                                         String middletime = Integer.toString(Integer.parseInt(startTime) + i);
                                         Button button = timelinearLayout.findViewWithTag(middletime);

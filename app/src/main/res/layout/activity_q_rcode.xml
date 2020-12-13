@@ -68,6 +68,7 @@
             android:background="@drawable/shape3"
             android:id="@+id/buttonScan" />
 
+
     </LinearLayout>
 
 </RelativeLayout>

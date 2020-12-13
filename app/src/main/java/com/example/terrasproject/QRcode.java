@@ -73,15 +73,6 @@ public class QRcode extends AppCompatActivity {
 
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        /*
-        Intent intent_QR_result = new Intent(QRcode.this,Timer_QR.class);
-        intent_QR_result.putExtra("result", String.valueOf(result));
-        startService(intent_QR_result);
-        */
-
-
-
-
         if (result != null) {
             //qrcode 가 없으면
             if (result.getContents() == null) {
@@ -104,8 +95,6 @@ public class QRcode extends AppCompatActivity {
                     Intent intent = new Intent(QRcode.this, AlarmMain.class);
                     intent.putExtra("activity", "qrcancel");
                     startActivity(intent);
-
-                    ShowReservation.status = 1;
                 }
                 else{
                     Toast.makeText(QRcode.this, "예약실패!", Toast.LENGTH_SHORT).show();

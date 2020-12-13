@@ -43,6 +43,7 @@ public class AlarmMain extends AppCompatActivity {
         }
         else{
             cancel();
+            myStartActivity(MainActivity.class);
         }
     }
 
@@ -86,9 +87,6 @@ public class AlarmMain extends AppCompatActivity {
         q.set(Calendar.SECOND, 0);
         q.set(Calendar.MILLISECOND, 0);
 
-        showToast(qrhour +":"+qrminute);
-
-
         AM.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pIntent);//예약알람
         AM.set(AlarmManager.RTC_WAKEUP, q.getTimeInMillis(), pIntent2);//qr알람
 
@@ -105,11 +103,6 @@ public class AlarmMain extends AppCompatActivity {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-    }
-
-    private void showToast(String msg)
-    {
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
 }
