@@ -3,5 +3,7 @@
 Seat Reservation for "Terras in Soongil Univ"
 
 DB : Firebase
+
+
 Reservation Logic : QR Code
 
